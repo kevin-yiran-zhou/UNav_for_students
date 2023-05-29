@@ -1,0 +1,13 @@
+location: 
+  place: New_York_University
+  building: 6_MetroTech
+  floor: Metrotech_6_Floor_4_With_Stairs
+  scale: 0.01209306372
+
+IO_root: "/home/unav/Desktop/UNav-IO"
+testing_image_folder: 'testing_images'
+
+
+
+
+      
