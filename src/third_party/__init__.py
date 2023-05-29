@@ -1,1 +1,1 @@
-from .TorchSIFT.src.torchsift.ransac.ransac import ransac
+from .torchSIFT.src.torchsift.ransac.ransac import ransac

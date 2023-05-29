@@ -2,7 +2,7 @@ import logging
 from feature.global_extractor import Global_Extractors
 from feature.local_extractor import Local_extractor
 from feature.local_matcher import Local_matcher
-from third_party.TorchSIFT.src.torchsift.ransac.ransac import ransac
+from third_party.torchSIFT.src.torchsift.ransac.ransac import ransac
 from .implicit_distortion_model import coarse_pose,pose_multi_refine
 import torch
 import cv2
