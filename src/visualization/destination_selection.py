@@ -76,11 +76,10 @@ class CanvasImage_Destination:
         self.container = self.canvas.create_rectangle((0, 0, self.imwidth, self.imheight), width=0)
         minsize, maxsize, number = 5, 20, 10
         self.width, self.height = self.__image.size
-        self.r=3
+        self.r=8
         self.chose={}
         self.nochose={}
         self.picked=[]
-
         for i,destination_name in enumerate(self.parent.destination_list_name):
             x0, y0 = self.parent.destination_list_location[i]
             self.nochose.update({str(x0) + '-' + str(y0): {
@@ -224,8 +223,8 @@ class CanvasImage_Destination:
         bbox = self.canvas.coords(self.container)
         scale= (bbox[2] - bbox[0]) / self.imwidth
         x_, y_ = (x - bbox[0]) / scale, (y - bbox[1]) / scale
-        for i,keyframe_name in enumerate(self.parent.keyframe_name):
-            x0, y0 = self.parent.keyframe_location[i]
+        for i,destination_name in enumerate(self.parent.destination_list_name):
+            x0, y0 = self.parent.destination_list_location[i]
             if (np.linalg.norm((x_-x0,y_-y0))<self.r*2)and(str(x0)+'-'+str(y0) in self.chose):
                 x0l, x0r, y0l, y0r = (x0 - self.r) * scale + bbox[0], (x0 + self.r) * scale + bbox[0], (
                             y0 - self.r) * scale + bbox[1], (y0 + self.r) * scale + bbox[1]

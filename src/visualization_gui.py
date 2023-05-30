@@ -34,10 +34,11 @@ class Main_window(ttk.Frame):
         while anchor_name[ind][0]!='w':
             self.destination_list_name.append(anchor_name[ind])
             self.destination_list_location.append(anchor_location[ind])
-        self.destination_list_name=map_data['anchor_name']
+            ind+=1
         self.hloc=hloc
         self.trajectory=trajectory
         self.destination=[]
+        self.GT=None
         self.retrieval=True
         self.__layout_design()
 
@@ -231,7 +232,59 @@ class Main_window(ttk.Frame):
             vertices.append(in_vertex[i])
         vertices = tuple(vertices)
         return vertices
-        
+    
+    def __visualize_result(self,floorplan_with_keyframe):
+        draw_floorplan_with_keyframe=ImageDraw.Draw(floorplan_with_keyframe)
+        l=60*self.plot_scale
+        x_,y_=50*self.plot_scale,l
+        ang=0
+        x1, y1 = x_ - 40*self.plot_scale * np.sin(ang), y_ - 40*self.plot_scale * np.cos(ang)
+        draw_floorplan_with_keyframe.ellipse((x_ - 20*self.plot_scale, y_ - 20*self.plot_scale, x_ + 20*self.plot_scale, y_ + 20*self.plot_scale), fill=(50, 0, 106))
+        draw_floorplan_with_keyframe.line([(x_, y_), (x1, y1)], fill=(50, 0, 106), width=int(10*self.plot_scale))
+        floorplan_with_keyframe_np=np.array(floorplan_with_keyframe)
+        floorplan_with_keyframe_np=cv2.putText(im, 'Estimation pose', (int(100*self.plot_scale), int(l)), cv2.FONT_HERSHEY_SIMPLEX,
+                    1, (0, 0, 0), round(2*self.plot_scale), cv2.LINE_AA)
+        floorplan_with_keyframe=Image.fromarray(floorplan_with_keyframe_np)
+        draw_floorplan_with_keyframe = ImageDraw.Draw(floorplan_with_keyframe)
+        if self.GT:
+            l+=70*self.plot_scale
+            x_, y_ = 50*self.plot_scale, l
+            x1, y1 = x_ - 40*self.plot_scale * np.sin(ang), y_ - 40*self.plot_scale * np.cos(ang)
+            draw_floorplan_with_keyframe.ellipse((x_ - 20*self.plot_scale, y_ - 20*self.plot_scale, x_ + 20*self.plot_scale, y_ + 20*self.plot_scale), fill=(255, 0, 255))
+            draw_floorplan_with_keyframe.line([(x_, y_), (x1, y1)], fill=(255, 0, 255), width=int(10*self.plot_scale))
+            floorplan_with_keyframe_np = np.array(floorplan_with_keyframe)
+            floorplan_with_keyframe_np = cv2.putText(floorplan_with_keyframe_np, 'Ground truth pose', (int(100*self.plot_scale), int(l)), cv2.FONT_HERSHEY_SIMPLEX,
+                             1, (0, 0, 0), round(2**self.plot_scale), cv2.LINE_AA)
+            floorplan_with_keyframe = Image.fromarray(floorplan_with_keyframe_np)
+            draw_floorplan_with_keyframe = ImageDraw.Draw(floorplan_with_keyframe)
+            ang_gt = self.GT[dic.split('.')[0]]['rot']
+            x_gt, y_gt = self.GT[dic.split('.')[0]]['trans'][0], self.GT[dic.split('.')[0]]['trans'][1]
+            x1, y1 = x_gt - 40 * np.sin(ang_gt), y_gt - 40 * np.cos(ang_gt)
+            draw_floorplan_with_keyframe.ellipse((x_gt - 20, y_gt - 20, x_gt + 20, y_gt + 20), fill=(255, 0, 255))
+            draw_floorplan_with_keyframe.line([(x_gt, y_gt), (x1, y1)], fill=(255, 0, 255), width=10)
+        if self.retrieval:
+            l+=70*self.plot_scale
+            x_, y_ = 50*self.plot_scale, l
+            x1, y1 = x_ - 20*self.plot_scale * np.sin(ang), y_ - 20 *self.plot_scale* np.cos(ang)
+            draw_floorplan_with_keyframe.ellipse((x_ - 10*self.plot_scale, y_ - 10*self.plot_scale, x_ + 10*self.plot_scale, y_ + 10*self.plot_scale), fill=(255, 0, 0))
+            draw_floorplan_with_keyframe.line([(x_, y_), (x1, y1)], fill=(255, 0, 0), width=int(7*self.plot_scale))
+            floorplan_with_keyframe_np = np.array(floorplan_with_keyframe)
+            floorplan_with_keyframe_np = cv2.putText(floorplan_with_keyframe_np, 'Similar images', (int(100*self.plot_scale), int(l)), cv2.FONT_HERSHEY_SIMPLEX,
+                             1, (0, 0, 0), round(2*self.plot_scale), cv2.LINE_AA)
+            floorplan_with_keyframe = Image.fromarray(floorplan_with_keyframe_np)
+            draw_floorplan_with_keyframe = ImageDraw.Draw(floorplan_with_keyframe)
+        if len(self.destination)>0:
+            l+=70*self.plot_scale
+            vertices = self.star_vertices([50*self.plot_scale, l], 30)
+            draw_floorplan_with_keyframe.polygon(vertices, fill='red')
+            floorplan_with_keyframe_np = np.array(floorplan_with_keyframe)
+            floorplan_with_keyframe_np = cv2.putText(floorplan_with_keyframe_np, 'Destination', (int(100*self.plot_scale), int(l)), cv2.FONT_HERSHEY_SIMPLEX,
+                             1, (0, 0, 0), round(2*self.plot_scale), cv2.LINE_AA)
+            floorplan_with_keyframe = Image.fromarray(floorplan_with_keyframe_np)
+            draw_floorplan_with_keyframe = ImageDraw.Draw(floorplan_with_keyframe)
+        draw_floorplan_with_keyframe.rectangle([(10,5),(400+100*self.plot_scale,l+40*self.plot_scale)],outline='black',width=int(2*self.plot_scale))
+        return draw_floorplan_with_keyframe,image
+
     def set_destination(self):
         floorplan=self.floorplan.copy()
         draw_floorplan = ImageDraw.Draw(floorplan)
@@ -257,53 +310,6 @@ class Main_window(ttk.Frame):
         self.myvar1.grid(row=0, column=4, columnspan=1, rowspan=40, sticky="snew")
         self.myvar1.bind('<Double-Button-1>', lambda event, action='double':
         self.select_destination(action))
-    
-    def visualize_result(self,image):
-        draw=ImageDraw.Draw(image)
-        l=60*self.plot_scale
-        x_,y_=50*self.plot_scale,l
-        ang=0
-        x1, y1 = x_ - 40*self.plot_scale * np.sin(ang), y_ - 40*self.plot_scale * np.cos(ang)
-        draw.ellipse((x_ - 20*self.plot_scale, y_ - 20*self.plot_scale, x_ + 20*self.plot_scale, y_ + 20*self.plot_scale), fill=(50, 0, 106))
-        draw.line([(x_, y_), (x1, y1)], fill=(50, 0, 106), width=int(10*self.plot_scale))
-        im=np.array(image)
-        im=cv2.putText(im, 'Estimation pose', (int(100*self.plot_scale), int(l)), cv2.FONT_HERSHEY_SIMPLEX,
-                    1, (0, 0, 0), round(2*self.plot_scale), cv2.LINE_AA)
-        image=Image.fromarray(im)
-        draw = ImageDraw.Draw(image)
-        if self.GT:
-            l+=70*self.plot_scale
-            x_, y_ = 50*self.plot_scale, l
-            x1, y1 = x_ - 40*self.plot_scale * np.sin(ang), y_ - 40*self.plot_scale * np.cos(ang)
-            draw.ellipse((x_ - 20*self.plot_scale, y_ - 20*self.plot_scale, x_ + 20*self.plot_scale, y_ + 20*self.plot_scale), fill=(255, 0, 255))
-            draw.line([(x_, y_), (x1, y1)], fill=(255, 0, 255), width=int(10*self.plot_scale))
-            im = np.array(image)
-            im = cv2.putText(im, 'Ground truth pose', (int(100*self.plot_scale), int(l)), cv2.FONT_HERSHEY_SIMPLEX,
-                             1, (0, 0, 0), round(2**self.plot_scale), cv2.LINE_AA)
-            image = Image.fromarray(im)
-            draw = ImageDraw.Draw(image)
-        if self.retrieval:
-            l+=70*self.plot_scale
-            x_, y_ = 50*self.plot_scale, l
-            x1, y1 = x_ - 20*self.plot_scale * np.sin(ang), y_ - 20 *self.plot_scale* np.cos(ang)
-            draw.ellipse((x_ - 10*self.plot_scale, y_ - 10*self.plot_scale, x_ + 10*self.plot_scale, y_ + 10*self.plot_scale), fill=(255, 0, 0))
-            draw.line([(x_, y_), (x1, y1)], fill=(255, 0, 0), width=int(7*self.plot_scale))
-            im = np.array(image)
-            im = cv2.putText(im, 'Similar images', (int(100*self.plot_scale), int(l)), cv2.FONT_HERSHEY_SIMPLEX,
-                             1, (0, 0, 0), round(2*self.plot_scale), cv2.LINE_AA)
-            image = Image.fromarray(im)
-            draw = ImageDraw.Draw(image)
-        if len(self.destination)>0:
-            l+=70*self.plot_scale
-            vertices = self.__star_vertices([50*self.plot_scale, l], 30)
-            draw.polygon(vertices, fill='red')
-            im = np.array(image)
-            im = cv2.putText(im, 'Destination', (int(100*self.plot_scale), int(l)), cv2.FONT_HERSHEY_SIMPLEX,
-                             1, (0, 0, 0), round(2*self.plot_scale), cv2.LINE_AA)
-            image = Image.fromarray(im)
-            draw = ImageDraw.Draw(image)
-        draw.rectangle([(10,5),(400+100*self.plot_scale,l+40*self.plot_scale)],outline='black',width=int(2*self.plot_scale))
-        return draw,image
 
     def animate(self,action):
         """
@@ -349,19 +355,18 @@ class Main_window(ttk.Frame):
         """
         Navigation
         """
+        paths=[]
         if pose and len(self.destination)>0:
-            paths=[]
             for destination_id in self.destination:
                 path_list=self.trajectory.calculate_path(pose[:2], destination_id)
                 if len(path_list)>0:
-                    paths.append(self.keyframe_location[self.keyframe_name.index(destination_id)])
-                    paths+=path
-            print(paths)
+                    paths.append(self.keyframe_location[self.keyframe_name.index(destination_id)].tolist())
+                    paths+=path_list
         """
-        Write camera pose on the floor plan
+        Animate results on the floor plan
         """
         floorplan_with_keyframe=self.floorplan_with_keyframe.copy()
-        draw, im = self.prepare_image(im)
+        draw, im = self.__visualize_result(floorplan_with_keyframe)
 
     def select_destination(self,w):
         self.newWindow = tk.Toplevel(self.master)
