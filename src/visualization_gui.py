@@ -11,6 +11,7 @@ from PIL import Image, ImageTk, ImageDraw, ImageOps
 from track import Hloc
 from navigation import Trajectory,command_type0,command_type1
 from visualization.destination_selection import Destination_window
+from navigation import command_type0
 
 import argparse
 from os.path import dirname,join,exists,realpath
@@ -25,6 +26,7 @@ class Main_window(ttk.Frame):
         ttk.Frame.__init__(self, master=master)
         self.config=config
         self.map_data=map_data
+        self.map_scale=self.config['location']['scale']
         self.keyframe_name=map_data['keyframe_name']
         self.keyframe_location=map_data['keyframe_location']
         self.destination_list_name,self.destination_list_location=[],[]
@@ -242,7 +244,8 @@ class Main_window(ttk.Frame):
         draw_floorplan_with_keyframe.ellipse((x_ - 20*self.plot_scale, y_ - 20*self.plot_scale, x_ + 20*self.plot_scale, y_ + 20*self.plot_scale), fill=(50, 0, 106))
         draw_floorplan_with_keyframe.line([(x_, y_), (x1, y1)], fill=(50, 0, 106), width=int(10*self.plot_scale))
         floorplan_with_keyframe_np=np.array(floorplan_with_keyframe)
-        floorplan_with_keyframe_np=cv2.putText(im, 'Estimation pose', (int(100*self.plot_scale), int(l)), cv2.FONT_HERSHEY_SIMPLEX,
+        h, _, _ = floorplan_with_keyframe_np.shape 
+        floorplan_with_keyframe_np=cv2.putText(floorplan_with_keyframe_np, 'Estimation pose', (int(100*self.plot_scale), int(l)), cv2.FONT_HERSHEY_SIMPLEX,
                     1, (0, 0, 0), round(2*self.plot_scale), cv2.LINE_AA)
         floorplan_with_keyframe=Image.fromarray(floorplan_with_keyframe_np)
         draw_floorplan_with_keyframe = ImageDraw.Draw(floorplan_with_keyframe)
@@ -262,6 +265,7 @@ class Main_window(ttk.Frame):
             x1, y1 = x_gt - 40 * np.sin(ang_gt), y_gt - 40 * np.cos(ang_gt)
             draw_floorplan_with_keyframe.ellipse((x_gt - 20, y_gt - 20, x_gt + 20, y_gt + 20), fill=(255, 0, 255))
             draw_floorplan_with_keyframe.line([(x_gt, y_gt), (x1, y1)], fill=(255, 0, 255), width=10)
+
         if self.retrieval:
             l+=70*self.plot_scale
             x_, y_ = 50*self.plot_scale, l
@@ -275,15 +279,75 @@ class Main_window(ttk.Frame):
             draw_floorplan_with_keyframe = ImageDraw.Draw(floorplan_with_keyframe)
         if len(self.destination)>0:
             l+=70*self.plot_scale
-            vertices = self.star_vertices([50*self.plot_scale, l], 30)
+            vertices = self.__star_vertices([50*self.plot_scale, l], 30)
             draw_floorplan_with_keyframe.polygon(vertices, fill='red')
             floorplan_with_keyframe_np = np.array(floorplan_with_keyframe)
             floorplan_with_keyframe_np = cv2.putText(floorplan_with_keyframe_np, 'Destination', (int(100*self.plot_scale), int(l)), cv2.FONT_HERSHEY_SIMPLEX,
                              1, (0, 0, 0), round(2*self.plot_scale), cv2.LINE_AA)
+            
             floorplan_with_keyframe = Image.fromarray(floorplan_with_keyframe_np)
             draw_floorplan_with_keyframe = ImageDraw.Draw(floorplan_with_keyframe)
-        draw_floorplan_with_keyframe.rectangle([(10,5),(400+100*self.plot_scale,l+40*self.plot_scale)],outline='black',width=int(2*self.plot_scale))
-        return draw_floorplan_with_keyframe,image
+        draw_floorplan_with_keyframe.rectangle([(10,5),(400+100*self.plot_scale,l+40*self.plot_scale)],outline='black',width=int(2*self.plot_scale))     
+
+        if self.pose:
+            x,y,ang=self.pose
+            ang_pi=ang/180*np.pi
+            x1, y1 = x - 40*self.plot_scale * np.sin(ang_pi), y - 40*self.plot_scale * np.cos(ang_pi)
+            draw_floorplan_with_keyframe.ellipse((x - 20*self.plot_scale, y - 20*self.plot_scale, x + 20*self.plot_scale, y + 20*self.plot_scale), fill=(50, 0, 106))
+            draw_floorplan_with_keyframe.line([(x, y), (x1, y1)], fill=(50, 0, 106), width=int(10*self.plot_scale))
+            message='Current location:  [%d,%d],  orientation:  %d degree' % (
+                x, y, ang)
+        else:
+            message= 'Cannot localize'
+        
+        floorplan_with_keyframe_np = np.array(floorplan_with_keyframe) 
+            
+        floorplan_with_keyframe_np = cv2.putText(floorplan_with_keyframe_np, message, (10, h - 200), cv2.FONT_HERSHEY_SIMPLEX,
+                            1, (0, 0, 255), 2, cv2.LINE_AA)
+        if self.pose:
+            floorplan_with_keyframe_np = cv2.putText(floorplan_with_keyframe_np, self.instruction_message, (10, h - 80), cv2.FONT_HERSHEY_SIMPLEX,
+                        1.2, (255, 0, 0), 2, cv2.LINE_AA)
+                        
+
+        if len(self.destination)>0:
+            for ind,d in enumerate(self.destination):
+                x_,y_=self.destination_list_location[self.destination_list_name.index(d)]
+                floorplan_with_keyframe_np=cv2.putText(floorplan_with_keyframe_np, 'Destination location %d:  [%d,%d]' % (ind+1,
+                            x_,y_), (10, h - 140-(len(self.destination)-ind-1)*60), cv2.FONT_HERSHEY_SIMPLEX,
+                                            1, (0, 0, 0), 2, cv2.LINE_AA)
+
+        floorplan_with_keyframe = Image.fromarray(floorplan_with_keyframe_np)
+        draw_floorplan_with_keyframe = ImageDraw.Draw(floorplan_with_keyframe)
+
+        # if self.retrieval:
+        #     for index in retreval_names:
+        #         k = self.kf[index.replace('.png','')]
+        #         x_, y_ = k['trans']
+        #         ang=k['rot']
+        #         x1, y1 = x_ - 20*self.plot_scale * np.sin(ang), y_ - 20*self.plot_scale * np.cos(ang)
+        #         draw.ellipse((x_ - 10*self.plot_scale, y_ - 10*self.plot_scale, x_ + 10*self.plot_scale, y_ + 10*self.plot_scale), fill=(255, 0, 0))
+        #         draw.line([(x_, y_), (x1, y1)], fill=(255, 0, 0), width=int(7*self.plot_scale))
+
+
+
+        for i in range(1,len(self.paths)):
+            x0, y0=self.paths[i-1]
+            x1, y1=self.paths[i]
+            draw_floorplan_with_keyframe.line([(x0, y0), (x1, y1)], fill=(255,0,0), width=int(10*self.plot_scale))
+            distance=np.linalg.norm([x1-x0,y1-y0])
+            rot=np.arctan2(x1-x0,y1-y0)
+            rot_ang=(rot-ang)/np.pi*180
+
+        width, height = floorplan_with_keyframe.size
+        scale = 1600 / width
+        newsize = (1600, int(height * scale))
+        floorplan_with_keyframe = floorplan_with_keyframe.resize(newsize)
+        tkimage1 = ImageTk.PhotoImage(floorplan_with_keyframe)
+        self.myvar1 = Label(self, image=tkimage1)
+        self.myvar1.image = tkimage1
+        self.myvar1.grid(row=0, column=4, columnspan=1, rowspan=40, sticky="snew")
+        self.myvar1.bind('<Double-Button-1>', lambda event, action='double':
+        self.select_destination(action))
 
     def set_destination(self):
         floorplan=self.floorplan.copy()
@@ -350,23 +414,25 @@ class Main_window(ttk.Frame):
         testing_image=np.array(testing_image)
         testing_image=cv2.cvtColor(testing_image,cv2.COLOR_BGR2RGB)
 
-        pose = self.hloc.get_location(testing_image) # Localize image
+        self.pose = self.hloc.get_location(testing_image) # Localize image
 
         """
         Navigation
         """
-        paths=[]
-        if pose and len(self.destination)>0:
+        if self.pose and len(self.destination)>0:
+            self.paths=[self.pose[:2]]
             for destination_id in self.destination:
-                path_list=self.trajectory.calculate_path(pose[:2], destination_id)
+                path_list=self.trajectory.calculate_path(self.pose[:2], destination_id)
                 if len(path_list)>0:
-                    paths.append(self.keyframe_location[self.keyframe_name.index(destination_id)].tolist())
-                    paths+=path_list
+                    self.paths+=path_list
+
+            self.instruction_message=command_type0(self.pose,self.paths,self.map_scale)
+
         """
         Animate results on the floor plan
         """
         floorplan_with_keyframe=self.floorplan_with_keyframe.copy()
-        draw, im = self.__visualize_result(floorplan_with_keyframe)
+        self.__visualize_result(floorplan_with_keyframe)
 
     def select_destination(self,w):
         self.newWindow = tk.Toplevel(self.master)

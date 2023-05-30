@@ -26,7 +26,7 @@ def find_fundamental3d(p1: Tensor, p2: Tensor, mask: Optional[Tensor] = None) ->
         X = X.transpose(-2, -1) @ mask.type_as(X) @ X
     else:
         X = X.transpose(-2, -1) @ X
-    _, _, V = torch.linalg.svd(X,driver='gesvda')
+    _, _, V = torch.linalg.svd(X)
     f: Tensor = V[..., -1].reshape(-1, 3, 3)
     return f
 

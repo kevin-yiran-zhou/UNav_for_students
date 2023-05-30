@@ -26,39 +26,45 @@ def actions(current_pose,path_list,scale):
     return action_list
 
 def command_type0(current_pose,path_list,scale):
-    if len(path_list) > 0:
-        action_list=actions(current_pose,path_list,scale)
-        message = ''
-        for i, ac in enumerate(action_list):
-            rot_clock, distance = ac
-            if rot_clock-int(rot_clock)==0.5:
-                message += 'Please walk %.1f meters along %d point 5 clock' % (
-                    distance, int(rot_clock))
-            else:
-                message += 'Please walk %.1f meters along %d clock' % (
-                    distance, int(rot_clock))
-            if i < len(action_list) - 1:
-                message += '. Then '
-            else:
-                message += '. And you will arrive the destination.\n'
-        return message
+    if current_pose:
+        if len(path_list) > 0:
+            action_list=actions(current_pose,path_list,scale)
+            message = ''
+            for i, ac in enumerate(action_list):
+                rot_clock, distance = ac
+                if rot_clock-int(rot_clock)==0.5:
+                    message += 'Please walk %.1f meters along %d point 5 clock' % (
+                        distance, int(rot_clock))
+                else:
+                    message += 'Please walk %.1f meters along %d clock' % (
+                        distance, int(rot_clock))
+                if i < len(action_list) - 1:
+                    message += '. Then '
+                else:
+                    message += '. And you will arrive the destination.\n'
+            return message
+        else:
+            return "There's no path to the destination"
     else:
-        return "There's no path to the destination"
+        return "Cannot localize"
 
 def command_type1(current_pose,path_list,scale):
-    if len(path_list) > 0:
-        action_list=actions(current_pose,path_list,scale)
-        message = ''
-        rot_clock,next_distance=action_list[0]
-        next_station='your destination' if len(action_list)==1 else 'anchor points'
-        if next_distance<5:
-            if rot_clock-int(rot_clock)==0.5:
-                message += 'Please walk %.1f meters along %d point 5 clock' % (
-                    next_distance, int(rot_clock))
-            else:
-                message += 'Please walk %.1f meters along %d clock' % (
-                    next_distance, int(rot_clock))
-            message +=' and you will reach '+next_station
-        return message
+    if current_pose:
+        if len(path_list) > 0:
+            action_list=actions(current_pose,path_list,scale)
+            message = ''
+            rot_clock,next_distance=action_list[0]
+            next_station='your destination' if len(action_list)==1 else 'anchor points'
+            if next_distance<5:
+                if rot_clock-int(rot_clock)==0.5:
+                    message += 'Please walk %.1f meters along %d point 5 clock' % (
+                        next_distance, int(rot_clock))
+                else:
+                    message += 'Please walk %.1f meters along %d clock' % (
+                        next_distance, int(rot_clock))
+                message +=' and you will reach '+next_station
+            return message
+        else:
+            return "There's no path to the destination"
     else:
-        return "There's no path to the destination"
+        return "Cannot localize"
