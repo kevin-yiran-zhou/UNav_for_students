@@ -17,7 +17,6 @@ class Hloc():
         self.T=map_data['T']
         self.db_desc=map_data['global_descriptor']
         self.keyframe_name=map_data['keyframe_name']
-        self.keyframe_location=map_data['keyframe_location']
         feature_configs=config['feature']
         global_extractor = Global_Extractors(root,feature_configs['global'])
         self.global_extractor=global_extractor.get()
@@ -106,7 +105,10 @@ class Hloc():
         
         del pts0,pts1,lms,mask
         torch.cuda.empty_cache()
-        return torch.cat(masked_pts0),torch.cat(masked_lms)
+        if len(masked_pts0)>0:
+            return torch.cat(masked_pts0),torch.cat(masked_lms)
+        else:
+            return torch.tensor([]),torch.tensor([])
 
     def pnp(self,image,feature2D,landmark3D):
         """
