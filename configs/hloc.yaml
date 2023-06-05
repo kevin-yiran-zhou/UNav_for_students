@@ -1,5 +1,5 @@
 hloc:
-  retrieval_num: 20
+  retrieval_num: 50
   implicit_num: 20
   ransac_thre: 30
 

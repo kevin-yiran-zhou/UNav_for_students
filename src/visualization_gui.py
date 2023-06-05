@@ -7,6 +7,7 @@ from ttkbootstrap import Style
 
 import cv2
 from PIL import Image, ImageTk, ImageDraw, ImageOps
+import logging
 
 from track import Hloc
 from navigation import Trajectory,command_type0,command_type1
@@ -43,6 +44,14 @@ class Main_window(ttk.Frame):
         self.GT=None
         self.retrieval=True
         self.__layout_design()
+        self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.INFO)
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.DEBUG)
+        console_format = logging.Formatter(
+            '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        console_handler.setFormatter(console_format)
+        self.logger.addHandler(console_handler)
 
     def __layout_design(self):
         windowWidth = self.master.winfo_reqwidth()
@@ -328,15 +337,15 @@ class Main_window(ttk.Frame):
         #         draw.ellipse((x_ - 10*self.plot_scale, y_ - 10*self.plot_scale, x_ + 10*self.plot_scale, y_ + 10*self.plot_scale), fill=(255, 0, 0))
         #         draw.line([(x_, y_), (x1, y1)], fill=(255, 0, 0), width=int(7*self.plot_scale))
 
-
-
-        for i in range(1,len(self.paths)):
-            x0, y0=self.paths[i-1]
-            x1, y1=self.paths[i]
-            draw_floorplan_with_keyframe.line([(x0, y0), (x1, y1)], fill=(255,0,0), width=int(10*self.plot_scale))
-            distance=np.linalg.norm([x1-x0,y1-y0])
-            rot=np.arctan2(x1-x0,y1-y0)
-            rot_ang=(rot-ang)/np.pi*180
+        paths=[self.pose[:2]]+self.paths
+        if self.pose and len(self.destination)>0:
+            for i in range(1,len(paths)):
+                x0, y0=paths[i-1]
+                x1, y1=paths[i]
+                draw_floorplan_with_keyframe.line([(x0, y0), (x1, y1)], fill=(255,0,0), width=int(10*self.plot_scale))
+                distance=np.linalg.norm([x1-x0,y1-y0])
+                rot=np.arctan2(x1-x0,y1-y0)
+                rot_ang=(rot-ang)/np.pi*180
 
         width, height = floorplan_with_keyframe.size
         scale = 1600 / width
@@ -420,13 +429,14 @@ class Main_window(ttk.Frame):
         Navigation
         """
         if self.pose and len(self.destination)>0:
-            self.paths=[self.pose[:2]]
+            self.paths=[]
             for destination_id in self.destination:
                 path_list=self.trajectory.calculate_path(self.pose[:2], destination_id)
                 if len(path_list)>0:
                     self.paths+=path_list
 
             self.instruction_message=command_type0(self.pose,self.paths,self.map_scale)
+            self.logger.info(f"===============================================\n                                                       {self.instruction_message}\n                                                       ===============================================")
 
         """
         Animate results on the floor plan
@@ -437,8 +447,6 @@ class Main_window(ttk.Frame):
     def select_destination(self,w):
         self.newWindow = tk.Toplevel(self.master)
         self.app1 = Destination_window(self.newWindow, parent=self)
-
-
 
 def main(root,hloc_config,visual_config):
     map_data=loader.load_data(visual_config)

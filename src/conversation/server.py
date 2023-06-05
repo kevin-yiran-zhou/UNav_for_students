@@ -108,7 +108,7 @@ class Connected_Client(threading.Thread):
                         if image_num==1:
                             message=command_type0(pose, path_list, self.map_scale)
                         else:
-                            message=command_type1(pose, path_list, self.map_scale)
+                            message=command_type0(pose, path_list, self.map_scale)
 
                         self.logger.info(f"===============================================\n                                                       {message}\n                                                       ===============================================")
                         self.socket.sendall(bytes(message, 'UTF-8'))

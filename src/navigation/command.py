@@ -15,14 +15,13 @@ def actions(current_pose,path_list,scale):
     for p in path_list:
         xn,yn=p
         distance = np.linalg.norm([xn - xc, yn - yc])
-        rot = np.arctan2(xc - xn, yc - yn)
-        rot_ang = rot/ np.pi * 180 - an
-        rot_ang = (-rot_ang) % 360
+        rot = np.arctan2(xn - xc, yn - yc)/ np.pi * 180+180
+        rot_ang = (an - rot) % 360
         rot_clock = (round(rot_ang.squeeze().tolist() / 15) / 2) % 12
         if rot_clock < 1:
             rot_clock += 12
         action_list.append([rot_clock, distance*scale])
-        xc, yc = xn, yn
+        xc, yc ,an= xn, yn,rot
     return action_list
 
 def command_type0(current_pose,path_list,scale):
