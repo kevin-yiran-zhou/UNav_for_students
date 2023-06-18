@@ -31,7 +31,7 @@ def load_map(path):
         keyframe = data['keyframes']
         keyframe=dict(sorted(keyframe.items()))
         landmarks=data['landmarks']
-        database_name,registered_feature,keyframe_name,keyframe_location=[],[],[],[]
+        database_name,database_loc,registered_feature,keyframe_name,keyframe_location=[],[],[],[],[]
         T = np.array(data['T'])
         rot_base = np.arctan2(T[1, 0], T[0, 0])
         for k,v in keyframe.items():
@@ -42,6 +42,7 @@ def load_map(path):
                 landmarks_temp.append([landmark['x'], landmark['y'], landmark['z']])
             registered_feature.append([keyframe[k]['kp_index'],landmarks_temp])
             database_name.append(k+'.png')
+            database_loc.append(v['trans']+[v['rot']])
             dbname_list=k.split('_')
             dbyaw=dbname_list[-1]
             key_name=dbname_list[0]
@@ -49,7 +50,7 @@ def load_map(path):
                 keyframe_name.append(key_name)
                 keyframe_location.append(v['trans'])
         logger.info(f'Loaded {len(keyframe_name)} keyframes data')
-    return database_name,registered_feature,keyframe_name,keyframe_location,T,rot_base
+    return database_name,database_loc,registered_feature,keyframe_name,keyframe_location,T,rot_base
 
 def load_local_feature(path):
     hfile_local = h5py.File(path, 'r')
@@ -119,8 +120,9 @@ def load_data(config):
     """
     Load Topometric map
     """
-    database_name,registered_feature,keyframe_name,keyframe_location,T,rot_base=load_map(paths['Map'])
+    database_name,database_loc,registered_feature,keyframe_name,keyframe_location,T,rot_base=load_map(paths['Map'])
     map_data['database_name']=database_name
+    map_data['database_loc']=database_loc
     map_data['registered_feature']=registered_feature
     map_data['keyframe_name']=keyframe_name
     map_data['keyframe_location']=np.array(keyframe_location)

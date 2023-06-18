@@ -29,6 +29,7 @@ class Main_window(ttk.Frame):
         self.map_data=map_data
         self.map_scale=self.config['location']['scale']
         self.keyframe_name=map_data['keyframe_name']
+        self.database_loc=map_data['database_loc']
         self.keyframe_location=map_data['keyframe_location']
         self.destination_list_name,self.destination_list_location=[],[]
         anchor_name=map_data['anchor_name']
@@ -328,15 +329,6 @@ class Main_window(ttk.Frame):
         floorplan_with_keyframe = Image.fromarray(floorplan_with_keyframe_np)
         draw_floorplan_with_keyframe = ImageDraw.Draw(floorplan_with_keyframe)
 
-        # if self.retrieval:
-        #     for index in retreval_names:
-        #         k = self.kf[index.replace('.png','')]
-        #         x_, y_ = k['trans']
-        #         ang=k['rot']
-        #         x1, y1 = x_ - 20*self.plot_scale * np.sin(ang), y_ - 20*self.plot_scale * np.cos(ang)
-        #         draw.ellipse((x_ - 10*self.plot_scale, y_ - 10*self.plot_scale, x_ + 10*self.plot_scale, y_ + 10*self.plot_scale), fill=(255, 0, 0))
-        #         draw.line([(x_, y_), (x1, y1)], fill=(255, 0, 0), width=int(7*self.plot_scale))
-
         paths=[self.pose[:2]]+self.paths
         if self.pose and len(self.destination)>0:
             for i in range(1,len(paths)):
@@ -347,6 +339,14 @@ class Main_window(ttk.Frame):
                 rot=np.arctan2(x1-x0,y1-y0)
                 rot_ang=(rot-ang)/np.pi*180
 
+        if self.retrieval:
+            for i in self.hloc.retrived_image_index:
+                x_,y_,ang=self.database_loc[i]
+                x1, y1 = x_ - 20*self.plot_scale * np.sin(ang), y_ - 20*self.plot_scale * np.cos(ang)
+                draw_floorplan_with_keyframe.ellipse((x_ - 10*self.plot_scale, y_ - 10*self.plot_scale, x_ + 10*self.plot_scale, y_ + 10*self.plot_scale), fill=(255, 0, 0))
+                draw_floorplan_with_keyframe.line([(x_, y_), (x1, y1)], fill=(255, 0, 0), width=int(7*self.plot_scale))
+        del self.hloc.retrived_image_index
+        
         width, height = floorplan_with_keyframe.size
         scale = 1600 / width
         newsize = (1600, int(height * scale))

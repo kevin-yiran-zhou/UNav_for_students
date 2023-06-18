@@ -5,7 +5,7 @@ import torch
 from os.path import join, exists
 from os import makedirs, mkdir
 from track import Hloc
-from navigation import Trajectory,command_type0,command_type1
+from navigation import Trajectory,actions,command_alert,command_normal
 import numpy as np
 import cv2
 import jpysocket
@@ -59,76 +59,85 @@ class Connected_Client(threading.Thread):
 
     def run(self):
         while self.signal:
-            try:
-                number = self.recvall(self.socket, 4)
-                if not number:
+            # try:
+            number = self.recvall(self.socket, 4)
+            if not number:
+                continue
+            command = int.from_bytes(number, 'big')
+            if command == 1:
+                self.logger.info('===========Loading image===========')
+                length = self.recvall(self.socket, 4)
+                data = self.recvall(self.socket, int.from_bytes(length, 'big'))
+                if not data:
                     continue
-                command = int.from_bytes(number, 'big')
-                if command == 1:
-                    self.logger.info('===========Loading image===========')
-                    length = self.recvall(self.socket, 4)
-                    data = self.recvall(self.socket, int.from_bytes(length, 'big'))
-                    if not data:
-                        continue
-                    nparr = np.frombuffer(data, np.uint8)
-                    img = cv2.imdecode(nparr, cv2.IMREAD_UNCHANGED)
-                    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                nparr = np.frombuffer(data, np.uint8)
+                img = cv2.imdecode(nparr, cv2.IMREAD_UNCHANGED)
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-                    Destination = self.socket.recv(4096)
-                    Destination = jpysocket.jpydecode(Destination)
-                    Place, Building, Floor, Destination_ = Destination.split(',')
-                    dicts = self.destination[Place][Building][Floor]
-                    for i in dicts:
-                        for k, v in i.items():
-                            if k == Destination_:
-                                destination_id = v
-                    self.logger.info('=========Received one image=========')
-                    pose = self.hloc.get_location(img)
-                    image_destination = join(
-                        self.log_dir, destination_id, 'images')
-                    if not exists(image_destination):
-                        makedirs(image_destination)
-                    message_destination = join(
-                        self.log_dir, destination_id, 'logs')
-                    if not exists(message_destination):
-                        mkdir(message_destination)
-                    current_time = time()
-                    readable_date = datetime.fromtimestamp(current_time)
-                    formatted_date = readable_date.strftime('%Y-%m-%d_%H-%M-%S')
+                Destination = self.socket.recv(4096)
+                Destination = jpysocket.jpydecode(Destination)
+                Place, Building, Floor, Destination_ = Destination.split(',')
+                dicts = self.destination[Place][Building][Floor]
+                for i in dicts:
+                    for k, v in i.items():
+                        if k == Destination_:
+                            destination_id = v
+                self.logger.info('=========Received one image=========')
+                pose = self.hloc.get_location(img)
+                image_destination = join(
+                    self.log_dir, destination_id, 'images')
+                if not exists(image_destination):
+                    makedirs(image_destination)
+                message_destination = join(
+                    self.log_dir, destination_id, 'logs')
+                if not exists(message_destination):
+                    mkdir(message_destination)
+                current_time = time()
+                readable_date = datetime.fromtimestamp(current_time)
+                formatted_date = readable_date.strftime('%Y-%m-%d_%H-%M-%S')
 
-                    image_num=len(self.hloc.list_2d)
-                    cv2.imwrite(
-                        join(image_destination, formatted_date+'.png'), img)
-                    if pose:
-
-                        self.logger.info(f"===============================================\n                                                       Estimated location: x: %d, y: %d, ang: %d\n                                                       Used {image_num} images for localization\n                                                       ===============================================" % (
-                            pose[0], pose[1], pose[2]))
-                        path_list=self.trajectory.calculate_path(pose[:2], destination_id)
-                        
-                        if image_num==1:
-                            message=command_type0(pose, path_list, self.map_scale)
+                image_num=len(self.hloc.list_2d)
+                cv2.imwrite(
+                    join(image_destination, formatted_date+'.png'), img)
+                if pose:
+                    
+                    self.logger.info(f"===============================================\n                                                       Estimated location: x: %d, y: %d, ang: %d\n                                                       Used {image_num} images for localization\n                                                       ===============================================" % (
+                        pose[0], pose[1], pose[2]))
+                    path_list=self.trajectory.calculate_path(pose[:2], destination_id)
+                    if len(path_list) > 0:
+                        action_list=actions(pose,path_list,self.map_scale)
+                        _,next_distance=action_list[0]
+                        if next_distance<5:
+                            message=command_alert(action_list)
+                        elif current_time-self.hloc.last_time>15 or image_num==1:
+                            message=command_normal(action_list)
+                            self.hloc.last_time=current_time
                         else:
-                            message=command_type0(pose, path_list, self.map_scale)
-
-                        self.logger.info(f"===============================================\n                                                       {message}\n                                                       ===============================================")
-                        self.socket.sendall(bytes(message, 'UTF-8'))
-
-                        with open(join(message_destination, formatted_date+'.txt'), "w") as file:
-                            file.write(str(pose[0])+', '+str(pose[1])+'\n')
-                            file.write(message)
-
+                            message=''
+                        message+='\n'
                     else:
-                        pass
+                        return "There's no path to the destination"
 
-                elif command == 0:
-                    self.logger.info('=====Send destination to Client=====')
-                    destination_dicts = str(self.destinations_dicts) + '\n'
-                    self.socket.sendall(bytes(destination_dicts, 'UTF-8'))
-            except:
-                self.logger.warning("Client " + str(self.address) + " has disconnected")
-                self.signal = False
-                self.connections.remove(self)
-                break
+
+                    self.logger.info(f"===============================================\n                                                       {message}\n                                                       ===============================================")
+                    self.socket.sendall(bytes(message, 'UTF-8'))
+
+                    with open(join(message_destination, formatted_date+'.txt'), "w") as file:
+                        file.write(str(pose[0])+', '+str(pose[1])+'\n')
+                        file.write(message)
+
+                else:
+                    return "Cannot localize"        
+
+            elif command == 0:
+                self.logger.info('=====Send destination to Client=====')
+                destination_dicts = str(self.destinations_dicts) + '\n'
+                self.socket.sendall(bytes(destination_dicts, 'UTF-8'))
+            # except:
+            #     self.logger.warning("Client " + str(self.address) + " has disconnected")
+            #     self.signal = False
+            #     self.connections.remove(self)
+            #     break
 
 
 class Server():
