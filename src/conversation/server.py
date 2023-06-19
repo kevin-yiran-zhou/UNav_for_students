@@ -109,25 +109,24 @@ class Connected_Client(threading.Thread):
                         _,next_distance=action_list[0]
                         if next_distance<5:
                             message=command_alert(action_list)
-                        elif current_time-self.hloc.last_time>15 or image_num==1:
+                        elif current_time-self.hloc.last_time>5 or image_num==1:
                             message=command_normal(action_list)
                             self.hloc.last_time=current_time
                         else:
                             message=''
                         message+='\n'
                     else:
-                        return "There's no path to the destination"
-
-
-                    self.logger.info(f"===============================================\n                                                       {message}\n                                                       ===============================================")
-                    self.socket.sendall(bytes(message, 'UTF-8'))
-
-                    with open(join(message_destination, formatted_date+'.txt'), "w") as file:
-                        file.write(str(pose[0])+', '+str(pose[1])+'\n')
-                        file.write(message)
-
+                        message = 'There is no path to the destination. \n'
                 else:
-                    return "Cannot localize"        
+                    message = "Cannot localize at this point. Please take some steps or turn around. \n"        
+
+                self.logger.info(f"===============================================\n                                                       {message}\n                                                       ===============================================")
+                self.socket.sendall(bytes(message, 'UTF-8'))
+
+                with open(join(message_destination, formatted_date+'.txt'), "w") as file:
+                    if pose:
+                        file.write(str(pose[0])+', '+str(pose[1])+'\n')
+                    file.write(message)
 
             elif command == 0:
                 self.logger.info('=====Send destination to Client=====')
