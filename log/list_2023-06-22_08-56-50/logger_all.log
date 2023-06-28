@@ -1,0 +1,722 @@
+[0.181s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'list', '-p', '--base-paths', '/home/unav/Desktop/UNav']
+[0.181s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='list', build_base='build', ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['/home/unav/Desktop/UNav'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], topological_order=False, names_only=False, paths_only=True, topological_graph=False, topological_graph_dot=False, topological_graph_density=False, topological_graph_legend=False, topological_graph_dot_cluster=False, topological_graph_dot_include_skipped=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f91345bc7c0>, verb_extension=<colcon_package_information.verb.list.ListVerb object at 0x7f9134587910>, main=<bound method ListVerb.main of <colcon_package_information.verb.list.ListVerb object at 0x7f9134587910>>)
+[0.199s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.199s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.199s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.199s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.199s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.199s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/unav/Desktop/UNav'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extensions ['ignore', 'ignore_ament_install']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extension 'ignore'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extension 'ignore_ament_install'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extensions ['colcon_pkg']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extension 'colcon_pkg'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extensions ['colcon_meta']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extension 'colcon_meta'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extensions ['ros']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extension 'ros'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extensions ['cmake', 'python']
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extension 'cmake'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extension 'python'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extensions ['python_setup_py']
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav) by extension 'python_setup_py'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extensions ['ignore', 'ignore_ament_install']
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extension 'ignore'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extension 'ignore_ament_install'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extensions ['colcon_pkg']
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extension 'colcon_pkg'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extensions ['colcon_meta']
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extension 'colcon_meta'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extensions ['ros']
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extension 'ros'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extensions ['cmake', 'python']
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extension 'cmake'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extension 'python'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extensions ['python_setup_py']
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/configs) by extension 'python_setup_py'
+[0.213s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/log) by extensions ['ignore', 'ignore_ament_install']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/log) by extension 'ignore'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/log) ignored
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extensions ['ignore', 'ignore_ament_install']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extension 'ignore'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extension 'ignore_ament_install'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extensions ['colcon_pkg']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extension 'colcon_pkg'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extensions ['colcon_meta']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extension 'colcon_meta'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extensions ['ros']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extension 'ros'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extensions ['cmake', 'python']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extension 'cmake'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extension 'python'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extensions ['python_setup_py']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/shell) by extension 'python_setup_py'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extensions ['ignore', 'ignore_ament_install']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extension 'ignore'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extension 'ignore_ament_install'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extensions ['colcon_pkg']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extension 'colcon_pkg'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extensions ['colcon_meta']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extension 'colcon_meta'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extensions ['ros']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extension 'ros'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extensions ['cmake', 'python']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extension 'cmake'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extension 'python'
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extensions ['python_setup_py']
+[0.214s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src) by extension 'python_setup_py'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extension 'ignore'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extension 'ignore_ament_install'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extensions ['colcon_pkg']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extension 'colcon_pkg'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extensions ['colcon_meta']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extension 'colcon_meta'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extensions ['ros']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extension 'ros'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extensions ['cmake', 'python']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extension 'cmake'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extension 'python'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extensions ['python_setup_py']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/__pycache__) by extension 'python_setup_py'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extensions ['ignore', 'ignore_ament_install']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extension 'ignore'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extension 'ignore_ament_install'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extensions ['colcon_pkg']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extension 'colcon_pkg'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extensions ['colcon_meta']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extension 'colcon_meta'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extensions ['ros']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extension 'ros'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extensions ['cmake', 'python']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extension 'cmake'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extension 'python'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extensions ['python_setup_py']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation) by extension 'python_setup_py'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extension 'ignore'
+[0.215s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extension 'ignore_ament_install'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extensions ['colcon_pkg']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extension 'colcon_pkg'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extensions ['colcon_meta']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extension 'colcon_meta'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extensions ['ros']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extension 'ros'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extensions ['cmake', 'python']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extension 'cmake'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extension 'python'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extensions ['python_setup_py']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/__pycache__) by extension 'python_setup_py'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extensions ['ignore', 'ignore_ament_install']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extension 'ignore'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extension 'ignore_ament_install'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extensions ['colcon_pkg']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extension 'colcon_pkg'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extensions ['colcon_meta']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extension 'colcon_meta'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extensions ['ros']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extension 'ros'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extensions ['cmake', 'python']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extension 'cmake'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extension 'python'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extensions ['python_setup_py']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils) by extension 'python_setup_py'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extension 'ignore'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extension 'ignore_ament_install'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extensions ['colcon_pkg']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extension 'colcon_pkg'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extensions ['colcon_meta']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extension 'colcon_meta'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extensions ['ros']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extension 'ros'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extensions ['cmake', 'python']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extension 'cmake'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extension 'python'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extensions ['python_setup_py']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/conversation/utils/__pycache__) by extension 'python_setup_py'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extensions ['ignore', 'ignore_ament_install']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extension 'ignore'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extension 'ignore_ament_install'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extensions ['colcon_pkg']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extension 'colcon_pkg'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extensions ['colcon_meta']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extension 'colcon_meta'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extensions ['ros']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extension 'ros'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extensions ['cmake', 'python']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extension 'cmake'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extension 'python'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extensions ['python_setup_py']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature) by extension 'python_setup_py'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extension 'ignore'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extension 'ignore_ament_install'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extensions ['colcon_pkg']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extension 'colcon_pkg'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extensions ['colcon_meta']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extension 'colcon_meta'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extensions ['ros']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extension 'ros'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extensions ['cmake', 'python']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extension 'cmake'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extension 'python'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extensions ['python_setup_py']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/feature/__pycache__) by extension 'python_setup_py'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extensions ['ignore', 'ignore_ament_install']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extension 'ignore'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extension 'ignore_ament_install'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extensions ['colcon_pkg']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extension 'colcon_pkg'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extensions ['colcon_meta']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extension 'colcon_meta'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extensions ['ros']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extension 'ros'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extensions ['cmake', 'python']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extension 'cmake'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extension 'python'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extensions ['python_setup_py']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader) by extension 'python_setup_py'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extension 'ignore'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extension 'ignore_ament_install'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extensions ['colcon_pkg']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extension 'colcon_pkg'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extensions ['colcon_meta']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extension 'colcon_meta'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extensions ['ros']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extension 'ros'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extensions ['cmake', 'python']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extension 'cmake'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extension 'python'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extensions ['python_setup_py']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/loader/__pycache__) by extension 'python_setup_py'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extensions ['ignore', 'ignore_ament_install']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extension 'ignore'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extension 'ignore_ament_install'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extensions ['colcon_pkg']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extension 'colcon_pkg'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extensions ['colcon_meta']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extension 'colcon_meta'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extensions ['ros']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extension 'ros'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extensions ['cmake', 'python']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extension 'cmake'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extension 'python'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extensions ['python_setup_py']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation) by extension 'python_setup_py'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extension 'ignore'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extension 'ignore_ament_install'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extensions ['colcon_pkg']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extension 'colcon_pkg'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extensions ['colcon_meta']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extension 'colcon_meta'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extensions ['ros']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extension 'ros'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extensions ['cmake', 'python']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extension 'cmake'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extension 'python'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extensions ['python_setup_py']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/navigation/__pycache__) by extension 'python_setup_py'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extensions ['ignore', 'ignore_ament_install']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extension 'ignore'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extension 'ignore_ament_install'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extensions ['colcon_pkg']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extension 'colcon_pkg'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extensions ['colcon_meta']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extension 'colcon_meta'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extensions ['ros']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extension 'ros'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extensions ['cmake', 'python']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extension 'cmake'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extension 'python'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extensions ['python_setup_py']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/ransac) by extension 'python_setup_py'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extensions ['ignore', 'ignore_ament_install']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extension 'ignore'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extension 'ignore_ament_install'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extensions ['colcon_pkg']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extension 'colcon_pkg'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extensions ['colcon_meta']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extension 'colcon_meta'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extensions ['ros']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extension 'ros'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extensions ['cmake', 'python']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extension 'cmake'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extension 'python'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extensions ['python_setup_py']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party) by extension 'python_setup_py'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extension 'ignore'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extension 'ignore_ament_install'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extensions ['colcon_pkg']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extension 'colcon_pkg'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extensions ['colcon_meta']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extension 'colcon_meta'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extensions ['ros']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extension 'ros'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extensions ['cmake', 'python']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extension 'cmake'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extension 'python'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extensions ['python_setup_py']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/__pycache__) by extension 'python_setup_py'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extensions ['ignore', 'ignore_ament_install']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extension 'ignore'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extension 'ignore_ament_install'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extensions ['colcon_pkg']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extension 'colcon_pkg'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extensions ['colcon_meta']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extension 'colcon_meta'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extensions ['ros']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extension 'ros'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extensions ['cmake', 'python']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extension 'cmake'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extension 'python'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extensions ['python_setup_py']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature) by extension 'python_setup_py'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extensions ['ignore', 'ignore_ament_install']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extension 'ignore'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extension 'ignore_ament_install'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extensions ['colcon_pkg']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extension 'colcon_pkg'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extensions ['colcon_meta']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extension 'colcon_meta'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extensions ['ros']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extension 'ros'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extensions ['cmake', 'python']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extension 'cmake'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extension 'python'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extensions ['python_setup_py']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad) by extension 'python_setup_py'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extension 'ignore'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extension 'ignore_ament_install'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extensions ['colcon_pkg']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extension 'colcon_pkg'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extensions ['colcon_meta']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extension 'colcon_meta'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extensions ['ros']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extension 'ros'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extensions ['cmake', 'python']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extension 'cmake'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extension 'python'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extensions ['python_setup_py']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/__pycache__) by extension 'python_setup_py'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extensions ['ignore', 'ignore_ament_install']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extension 'ignore'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extension 'ignore_ament_install'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extensions ['colcon_pkg']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extension 'colcon_pkg'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extensions ['colcon_meta']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extension 'colcon_meta'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extensions ['ros']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extension 'ros'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extensions ['cmake', 'python']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extension 'cmake'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extension 'python'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extensions ['python_setup_py']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters) by extension 'python_setup_py'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extensions ['ignore', 'ignore_ament_install']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extension 'ignore'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extension 'ignore_ament_install'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extensions ['colcon_pkg']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extension 'colcon_pkg'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extensions ['colcon_meta']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extension 'colcon_meta'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extensions ['ros']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extension 'ros'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extensions ['cmake', 'python']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extension 'cmake'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extension 'python'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extensions ['python_setup_py']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log) by extension 'python_setup_py'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extensions ['ignore', 'ignore_ament_install']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extension 'ignore'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extension 'ignore_ament_install'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extensions ['colcon_pkg']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extension 'colcon_pkg'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extensions ['colcon_meta']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extension 'colcon_meta'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extensions ['ros']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extension 'ros'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extensions ['cmake', 'python']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extension 'cmake'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extension 'python'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extensions ['python_setup_py']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper) by extension 'python_setup_py'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extensions ['ignore', 'ignore_ament_install']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extension 'ignore'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extension 'ignore_ament_install'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extensions ['colcon_pkg']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extension 'colcon_pkg'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extensions ['colcon_meta']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extension 'colcon_meta'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extensions ['ros']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extension 'ros'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extensions ['cmake', 'python']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extension 'cmake'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extension 'python'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extensions ['python_setup_py']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/global_feature/pytorch_NetVlad/netvlad_parameters/log/paper/checkpoints) by extension 'python_setup_py'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extensions ['ignore', 'ignore_ament_install']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extension 'ignore'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extension 'ignore_ament_install'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extensions ['colcon_pkg']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extension 'colcon_pkg'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extensions ['colcon_meta']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extension 'colcon_meta'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extensions ['ros']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extension 'ros'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extensions ['cmake', 'python']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extension 'cmake'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extension 'python'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extensions ['python_setup_py']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature) by extension 'python_setup_py'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extensions ['ignore', 'ignore_ament_install']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extension 'ignore'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extension 'ignore_ament_install'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extensions ['colcon_pkg']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extension 'colcon_pkg'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extensions ['colcon_meta']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extension 'colcon_meta'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extensions ['ros']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extension 'ros'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extensions ['cmake', 'python']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extension 'cmake'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extension 'python'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extensions ['python_setup_py']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue) by extension 'python_setup_py'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extension 'ignore'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extension 'ignore_ament_install'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extensions ['colcon_pkg']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extension 'colcon_pkg'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extensions ['colcon_meta']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extension 'colcon_meta'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extensions ['ros']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extension 'ros'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extensions ['cmake', 'python']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extension 'cmake'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extension 'python'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extensions ['python_setup_py']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/__pycache__) by extension 'python_setup_py'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extensions ['ignore', 'ignore_ament_install']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extension 'ignore'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extension 'ignore_ament_install'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extensions ['colcon_pkg']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extension 'colcon_pkg'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extensions ['colcon_meta']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extension 'colcon_meta'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extensions ['ros']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extension 'ros'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extensions ['cmake', 'python']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extension 'cmake'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extension 'python'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extensions ['python_setup_py']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors) by extension 'python_setup_py'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extensions ['ignore', 'ignore_ament_install']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extension 'ignore'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extension 'ignore_ament_install'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extensions ['colcon_pkg']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extension 'colcon_pkg'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extensions ['colcon_meta']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extension 'colcon_meta'
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extensions ['ros']
+[0.225s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extension 'ros'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extensions ['cmake', 'python']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extension 'cmake'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extension 'python'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extensions ['python_setup_py']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork) by extension 'python_setup_py'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extensions ['ignore', 'ignore_ament_install']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extension 'ignore'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extension 'ignore_ament_install'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extensions ['colcon_pkg']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extension 'colcon_pkg'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extensions ['colcon_meta']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extension 'colcon_meta'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extensions ['ros']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extension 'ros'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extensions ['cmake', 'python']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extension 'cmake'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extension 'python'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extensions ['python_setup_py']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models) by extension 'python_setup_py'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extension 'ignore'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extension 'ignore_ament_install'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extensions ['colcon_pkg']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extension 'colcon_pkg'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extensions ['colcon_meta']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extension 'colcon_meta'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extensions ['ros']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extension 'ros'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extensions ['cmake', 'python']
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extension 'cmake'
+[0.226s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extension 'python'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extensions ['python_setup_py']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/__pycache__) by extension 'python_setup_py'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extensions ['ignore', 'ignore_ament_install']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extension 'ignore'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extension 'ignore_ament_install'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extensions ['colcon_pkg']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extension 'colcon_pkg'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extensions ['colcon_meta']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extension 'colcon_meta'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extensions ['ros']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extension 'ros'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extensions ['cmake', 'python']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extension 'cmake'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extension 'python'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extensions ['python_setup_py']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/SuperGluePretrainedNetwork/models/weights) by extension 'python_setup_py'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extension 'ignore'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extension 'ignore_ament_install'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extensions ['colcon_pkg']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extension 'colcon_pkg'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extensions ['colcon_meta']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extension 'colcon_meta'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extensions ['ros']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extension 'ros'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extensions ['cmake', 'python']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extension 'cmake'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extension 'python'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extensions ['python_setup_py']
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/extractors/__pycache__) by extension 'python_setup_py'
+[0.227s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extensions ['ignore', 'ignore_ament_install']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extension 'ignore'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extension 'ignore_ament_install'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extensions ['colcon_pkg']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extension 'colcon_pkg'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extensions ['colcon_meta']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extension 'colcon_meta'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extensions ['ros']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extension 'ros'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extensions ['cmake', 'python']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extension 'cmake'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extension 'python'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extensions ['python_setup_py']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers) by extension 'python_setup_py'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extension 'ignore'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extension 'ignore_ament_install'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extensions ['colcon_pkg']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extension 'colcon_pkg'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extensions ['colcon_meta']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extension 'colcon_meta'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extensions ['ros']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extension 'ros'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extensions ['cmake', 'python']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extension 'cmake'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extension 'python'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extensions ['python_setup_py']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/local_feature/SuperPoint_SuperGlue/matchers/__pycache__) by extension 'python_setup_py'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/stella_vslam) by extensions ['ignore', 'ignore_ament_install']
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/stella_vslam) by extension 'ignore'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/stella_vslam) by extension 'ignore_ament_install'
+[0.228s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/stella_vslam) by extensions ['colcon_pkg']
+[0.229s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/stella_vslam) by extension 'colcon_pkg'
+[0.229s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/stella_vslam) by extensions ['colcon_meta']
+[0.229s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/stella_vslam) by extension 'colcon_meta'
+[0.229s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/stella_vslam) by extensions ['ros']
+[0.229s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/stella_vslam) by extension 'ros'
+[0.230s] DEBUG:colcon.colcon_core.package_identification:Package '/home/unav/Desktop/UNav/src/third_party/stella_vslam' with type 'ros.cmake' and name 'stella_vslam'
+[0.230s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extensions ['ignore', 'ignore_ament_install']
+[0.230s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extension 'ignore'
+[0.230s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extension 'ignore_ament_install'
+[0.230s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extensions ['colcon_pkg']
+[0.230s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extension 'colcon_pkg'
+[0.230s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extensions ['colcon_meta']
+[0.230s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extension 'colcon_meta'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extensions ['ros']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extension 'ros'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extensions ['cmake', 'python']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extension 'cmake'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extension 'python'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extensions ['python_setup_py']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT) by extension 'python_setup_py'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extensions ['ignore', 'ignore_ament_install']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extension 'ignore'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extension 'ignore_ament_install'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extensions ['colcon_pkg']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extension 'colcon_pkg'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extensions ['colcon_meta']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extension 'colcon_meta'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extensions ['ros']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extension 'ros'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extensions ['cmake', 'python']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extension 'cmake'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extension 'python'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extensions ['python_setup_py']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/README_files) by extension 'python_setup_py'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extensions ['ignore', 'ignore_ament_install']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extension 'ignore'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extension 'ignore_ament_install'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extensions ['colcon_pkg']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extension 'colcon_pkg'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extensions ['colcon_meta']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extension 'colcon_meta'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extensions ['ros']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extension 'ros'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extensions ['cmake', 'python']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extension 'cmake'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extension 'python'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extensions ['python_setup_py']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/dev) by extension 'python_setup_py'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extensions ['ignore', 'ignore_ament_install']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extension 'ignore'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extension 'ignore_ament_install'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extensions ['colcon_pkg']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extension 'colcon_pkg'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extensions ['colcon_meta']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extension 'colcon_meta'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extensions ['ros']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extension 'ros'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extensions ['cmake', 'python']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extension 'cmake'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extension 'python'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extensions ['python_setup_py']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src) by extension 'python_setup_py'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extensions ['ignore', 'ignore_ament_install']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extension 'ignore'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extension 'ignore_ament_install'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extensions ['colcon_pkg']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extension 'colcon_pkg'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extensions ['colcon_meta']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extension 'colcon_meta'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extensions ['ros']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extension 'ros'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extensions ['cmake', 'python']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extension 'cmake'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extension 'python'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extensions ['python_setup_py']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift) by extension 'python_setup_py'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extension 'ignore'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extension 'ignore_ament_install'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extensions ['colcon_pkg']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extension 'colcon_pkg'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extensions ['colcon_meta']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extension 'colcon_meta'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extensions ['ros']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extension 'ros'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extensions ['cmake', 'python']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extension 'cmake'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extension 'python'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extensions ['python_setup_py']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/__pycache__) by extension 'python_setup_py'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extensions ['ignore', 'ignore_ament_install']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extension 'ignore'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extension 'ignore_ament_install'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extensions ['colcon_pkg']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extension 'colcon_pkg'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extensions ['colcon_meta']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extension 'colcon_meta'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extensions ['ros']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extension 'ros'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extensions ['cmake', 'python']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extension 'cmake'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extension 'python'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extensions ['python_setup_py']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac) by extension 'python_setup_py'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extension 'ignore'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extension 'ignore_ament_install'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extensions ['colcon_pkg']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extension 'colcon_pkg'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extensions ['colcon_meta']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extension 'colcon_meta'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extensions ['ros']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extension 'ros'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extensions ['cmake', 'python']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extension 'cmake'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extension 'python'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extensions ['python_setup_py']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/third_party/torchSIFT/src/torchsift/ransac/__pycache__) by extension 'python_setup_py'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extensions ['ignore', 'ignore_ament_install']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extension 'ignore'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extension 'ignore_ament_install'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extensions ['colcon_pkg']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extension 'colcon_pkg'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extensions ['colcon_meta']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extension 'colcon_meta'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extensions ['ros']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extension 'ros'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extensions ['cmake', 'python']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extension 'cmake'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extension 'python'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extensions ['python_setup_py']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track) by extension 'python_setup_py'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extension 'ignore'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extension 'ignore_ament_install'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extensions ['colcon_pkg']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extension 'colcon_pkg'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extensions ['colcon_meta']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extension 'colcon_meta'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extensions ['ros']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extension 'ros'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extensions ['cmake', 'python']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extension 'cmake'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extension 'python'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extensions ['python_setup_py']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/track/__pycache__) by extension 'python_setup_py'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extensions ['ignore', 'ignore_ament_install']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extension 'ignore'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extension 'ignore_ament_install'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extensions ['colcon_pkg']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extension 'colcon_pkg'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extensions ['colcon_meta']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extension 'colcon_meta'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extensions ['ros']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extension 'ros'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extensions ['cmake', 'python']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extension 'cmake'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extension 'python'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extensions ['python_setup_py']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization) by extension 'python_setup_py'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extension 'ignore'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extension 'ignore_ament_install'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extensions ['colcon_pkg']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extension 'colcon_pkg'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extensions ['colcon_meta']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extension 'colcon_meta'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extensions ['ros']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extension 'ros'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extensions ['cmake', 'python']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extension 'cmake'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extension 'python'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extensions ['python_setup_py']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/__pycache__) by extension 'python_setup_py'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extensions ['ignore', 'ignore_ament_install']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extension 'ignore'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extension 'ignore_ament_install'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extensions ['colcon_pkg']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extension 'colcon_pkg'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extensions ['colcon_meta']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extension 'colcon_meta'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extensions ['ros']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extension 'ros'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extensions ['cmake', 'python']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extension 'cmake'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extension 'python'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extensions ['python_setup_py']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils) by extension 'python_setup_py'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extension 'ignore'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extension 'ignore_ament_install'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extensions ['colcon_pkg']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extension 'colcon_pkg'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extensions ['colcon_meta']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extension 'colcon_meta'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extensions ['ros']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extension 'ros'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extensions ['cmake', 'python']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extension 'cmake'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extension 'python'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extensions ['python_setup_py']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(/home/unav/Desktop/UNav/src/visualization/utils/__pycache__) by extension 'python_setup_py'
+[0.236s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults

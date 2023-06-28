@@ -1,5 +1,5 @@
-from time import time
+import torch
 
-a=time()
-
-print(a)
+a=torch.rand((3,10))
+for i in a:
+    print(sum(i<0.5))

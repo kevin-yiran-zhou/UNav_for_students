@@ -10,9 +10,8 @@ from PIL import Image, ImageTk, ImageDraw, ImageOps
 import logging
 
 from track import Hloc
-from navigation import Trajectory,command_type0,command_type1
+from navigation import Trajectory,actions,command_debug
 from visualization.destination_selection import Destination_window
-from navigation import command_type0
 
 import argparse
 from os.path import dirname,join,exists,realpath
@@ -329,8 +328,8 @@ class Main_window(ttk.Frame):
         floorplan_with_keyframe = Image.fromarray(floorplan_with_keyframe_np)
         draw_floorplan_with_keyframe = ImageDraw.Draw(floorplan_with_keyframe)
 
-        paths=[self.pose[:2]]+self.paths
         if self.pose and len(self.destination)>0:
+            paths=[self.pose[:2]]+self.paths
             for i in range(1,len(paths)):
                 x0, y0=paths[i-1]
                 x1, y1=paths[i]
@@ -435,7 +434,10 @@ class Main_window(ttk.Frame):
                 if len(path_list)>0:
                     self.paths+=path_list
 
-            self.instruction_message=command_type0(self.pose,self.paths,self.map_scale)
+            action_list=actions(self.pose,self.paths,self.map_scale)
+            self.instruction_message=command_debug(action_list)
+            x, y, an = self.pose
+            print("x="+str(x)+", y="+str(y)+", angle="+str(an))
             self.logger.info(f"===============================================\n                                                       {self.instruction_message}\n                                                       ===============================================")
 
         """

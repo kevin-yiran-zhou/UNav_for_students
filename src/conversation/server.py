@@ -107,7 +107,7 @@ class Connected_Client(threading.Thread):
                     if len(path_list) > 0:
                         action_list=actions(pose,path_list,self.map_scale)
                         _,next_distance=action_list[0]
-                        if next_distance<5:
+                        if next_distance < 5:
                             message=command_alert(action_list)
                         elif current_time-self.hloc.last_time>5 or image_num==1:
                             message=command_normal(action_list)

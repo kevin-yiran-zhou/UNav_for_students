@@ -120,20 +120,83 @@ class Hloc():
 
     def nvs_ot(self,image,topk):
         feats0 = self.local_feature_extractor(image)
-        fts0_list,desc0_list,fts1_list,desc1_list=[],[],[],[]
-        max_len=feats0['keypoints'].size(0)
+        fts1_list,desc1_list,lms=[],[],[]
+        max_len=feats0['keypoints'].shape[0]
         for i in topk[0]:
             feat1=self.local_feature_matcher.hfile_local[self.local_feature_matcher.db_name[i]]
-            fts0_list.append(feats0['keypoints'])
-            desc0_list.append(torch.transpose(feats0['descriptors'],0,1))
-            fts1_list.append(feat1['keypoints'])
-            desc1_list.append(torch.transpose(feat1['descriptors'],0,1))
-            size=feat1['keypoints'].size(0)
+            registered_feature = self.local_feature_matcher.registered_feature[i]
+            lms.append({key: value for key, value in zip(registered_feature[0], registered_feature[1])})
+            fts1_list.append(torch.tensor(np.array(feat1['keypoints'])))
+            desc1_list.append(torch.transpose(torch.tensor(np.array(feat1['descriptors'])),0,1))
+            size=feat1['keypoints'].shape[0]
             if max_len<size:
                 max_len=size
-        fts0=torch.cat(fts0_list)
-        desc0=torch.cat(desc0_list)
-        print(fts0.size)
+
+        k=len(topk[0])
+        fts0_list,desc0_list=[],[]
+        ft0=torch.tensor(feats0['keypoints'])
+        des0=torch.transpose(torch.tensor(feats0['descriptors']),0,1).unsqueeze(0)
+        m=des0.size(2)
+        fts0_ = ft0.expand(k, -1, -1)
+        desc0_=des0.expand(k, -1, -1)
+        fts0 = torch.zeros(k, max_len, 2)
+        desc0=torch.zeros(k, max_len, m)
+        fts0_mask=torch.zeros(k, max_len, 2)
+        desc0_mask=torch.zeros(k, max_len, m)
+
+        fts0[:,:feats0['keypoints'].shape[0]]=fts0_
+        desc0[:,:feats0['keypoints'].shape[0]]=desc0_
+        fts0_mask[:,:feats0['keypoints'].shape[0]]=1
+        desc0_mask[:,:feats0['keypoints'].shape[0]]=1
+
+        fts1=torch.zeros((fts0.size(0),max_len,2))
+        desc1=torch.zeros((desc0.size(0),max_len,m))
+        fts1_mask=torch.zeros(k, max_len, 2)
+        desc1_mask=torch.zeros(k, max_len, m)
+        print(max_len)
+        for i in range(fts1.size(0)):
+            fts=fts1_list[i]
+            desc=desc1_list[i]
+            fts1[i,:fts.size(0),:]=fts
+            fts1_mask[i,:fts.size(0),:]=1
+            desc1[i,:desc.size(0),:]=desc
+            desc1_mask[i,:desc.size(0),:]=1
+
+        best_model, inliers, best_errors=match(fts0.double(),desc0,fts1.double(),desc1)
+
+        self.retrived_image_index=[]
+
+        for k,best_error in enumerate(best_errors):
+            mask = torch.isnan(best_error) == False
+            valid_values = best_error[mask]
+            error=sum(valid_values)/sum(fts1_mask[k])[0]
+            if error<3000:
+                self.retrived_image_index.append(k)
+                # inlier=inliers[k]
+                print(len(valid_values))
+            # print(sum(valid_values))
+            # sum_num=0
+            # for i in k:
+            #     mask = torch.isnan(i) == False
+            #     valid_values = i[mask]
+            #     sum_num+=sum(valid_values<1.6)
+            # print('matched:%d'%sum_num)
+        exit()
+        # Calculate sizes for each item in the batch
+        sizes = diag_masks.sum(-1)
+
+        # Filtering based on the threshold
+        valid_indices = sizes > self.thre
+
+        # Apply thresholding
+        diag_masks = diag_masks[valid_indices]
+        pts0 = pts0[valid_indices]
+        print(pts0)
+        # for k in range(inliner.size(0)):
+        #     mask=inliner[k]
+        #     ft0=fts0[k]
+        #     ft1=fts1[k]
+
 
         
 
