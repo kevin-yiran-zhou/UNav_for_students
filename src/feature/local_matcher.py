@@ -1,4 +1,6 @@
 from feature.local_extractor import Local_extractor
+from third_party.local_feature.LightGlue.lightglue import LightGlue, SuperPoint
+from third_party.local_feature.LightGlue.lightglue.utils import load_image, match_pair
 import torch
 import numpy as np
 
