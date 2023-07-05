@@ -7,14 +7,14 @@
 # IO_root: "/mnt/data/UNav-IO"
 # testing_image_folder: 'images/langone'
 
-location: 
- place: New_York_University
- building: 6_MetroTech
- floor: Metrotech_6_Floor_4_With_Stairs
- scale: 0.01209306372
+# location: 
+#  place: New_York_University
+#  building: 6_MetroTech
+#  floor: Metrotech_6_Floor_4_With_Stairs
+#  scale: 0.01209306372
 
-IO_root: "/mnt/data/UNav-IO"
-testing_image_folder: '/mnt/data/UNav-IO/logs/New_York_University/6_MetroTech/Metrotech_6_Floor_4_With_Stairs/ground_truth_error'
+# IO_root: "/mnt/data/UNav-IO"
+# testing_image_folder: '/mnt/data/UNav-IO/logs/New_York_University/6_MetroTech/Metrotech_6_Floor_4_With_Stairs/ground_truth_error'
 
 # location: 
 #   place: New_York_City
@@ -26,11 +26,11 @@ testing_image_folder: '/mnt/data/UNav-IO/logs/New_York_University/6_MetroTech/Me
 # testing_image_folder: 'images/nyise1'
 
 
-# location: 
-#  place: New_York_City
-#  building: LightHouse
-#  floor: '6'
-#  scale: 0.01098358101
+location: 
+ place: New_York_University
+ building: NYU_Langone
+ floor: '17_DENSE_LOW'
+ scale: 0.02157699999
 
-# IO_root: "/mnt/data/UNav-IO"
-# testing_image_folder: '/mnt/data/UNav-IO/logs/New_York_City/LightHouse/6/15851/images'
+IO_root: "/mnt/data/UNav-IO"
+testing_image_folder: '/mnt/data/UNav-IO/logs/New_York_University/NYU_Langone/17_DENSE_LOW/test/images'

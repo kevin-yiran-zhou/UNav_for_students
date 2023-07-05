@@ -58,7 +58,8 @@ class Hloc():
         max_len=0
         self.retrived_image_index=[]
         for i in topk[0]:
-            pts0,pts1,lms=self.local_feature_matcher.superglue(i, feats0)
+            # pts0,pts1,lms=self.local_feature_matcher.superglue(i, feats0)
+            pts0,pts1,lms=self.local_feature_matcher.lightglue(i, feats0)
             feat_inliner_size=pts0.shape[0]
             if feat_inliner_size>self.thre:
                 pts0_list.append(pts0)
@@ -91,6 +92,8 @@ class Hloc():
         try:
             _,inliners,_=ransac(pts0,pts1,mask)
         except:
+            del pts0,pts1,lms,mask
+            torch.cuda.empty_cache()
             return torch.tensor([]),None
 
         diag_masks = torch.diagonal(inliners, dim1=-2, dim2=-1)
@@ -196,9 +199,6 @@ class Hloc():
         #     mask=inliner[k]
         #     ft0=fts0[k]
         #     ft1=fts1[k]
-
-
-        
 
     def pnp(self,image,feature2D,landmark3D):
         """

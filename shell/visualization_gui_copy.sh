@@ -1,10 +1,10 @@
 #!/bin/bash
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-script="$CURRENT_DIR/../src/visualization_gui.py"
+script="$CURRENT_DIR/../src/visualization_gui_copy.py"
 visual_config="$CURRENT_DIR/../configs/visualization.yaml"
 hloc_config="$CURRENT_DIR/../configs/hloc.yaml"
 
 conda activate UNav
 
-CUDA_VISIBLE_DEVICES=1 python $script -v $visual_config -l $hloc_config
+CUDA_VISIBLE_DEVICES=0 python $script -v $visual_config -l $hloc_config

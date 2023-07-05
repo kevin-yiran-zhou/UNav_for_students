@@ -8,6 +8,7 @@ console_handler.setLevel(logging.DEBUG)
 console_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(console_format)
 logger.addHandler(console_handler)
+step = 0.68
 
 def actions(current_pose,path_list,scale):
     xc, yc, an = current_pose
@@ -61,20 +62,20 @@ def command_alert(action_list):
     else:
         if rot_clock-int(rot_clock)==0.5:
             message += 'Alert!!!!!!! %s to %d point 5 clock, and walk %d steps ' % (
-                direction, int(rot_clock), int(next_distance/0.68))
+                direction, int(rot_clock), int(next_distance/step))
         else:
             message += 'Alert!!!!!!! %s to %d clock, and walk %d steps ' % (
-                direction, int(rot_clock), int(next_distance/0.68))
+                direction, int(rot_clock), int(next_distance/step))
         if next_station=='':
             rot_clock,next_distance=action_list[1]
             direction = get_direction(rot_clock)
             next_station='your destination' if len(action_list)==2 else ''
             if rot_clock-int(rot_clock)==0.5:
                 message += 'And then %s to %d point 5 clock, and walk %d steps ' % (
-                    direction, int(rot_clock), int(next_distance/0.68))
+                    direction, int(rot_clock), int(next_distance/step))
             else:
                 message += 'And then %s to %d clock, and walk %d steps ' % (
-                    direction, int(rot_clock), int(next_distance/0.68))
+                    direction, int(rot_clock), int(next_distance/step))
             if next_distance<5:
                 if next_station=='your destination':
                     message +=' to arrive '+next_station
@@ -103,10 +104,10 @@ def command_normal(action_list):
     next_station='your destination' if len(action_list)==1 else ''
     if rot_clock-int(rot_clock)==0.5:
         message += '%s to %d point 5 clock, and walk %d steps' % (
-            direction, int(rot_clock), int(next_distance/0.68))
+            direction, int(rot_clock), int(next_distance/step))
     else:
         message += '%s to %d clock, and walk %d steps' % (
-            direction, int(rot_clock), int(next_distance/0.68))
+            direction, int(rot_clock), int(next_distance/step))
     if next_station=='':
         message += next_station
     else:

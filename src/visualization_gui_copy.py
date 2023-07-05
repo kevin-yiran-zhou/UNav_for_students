@@ -10,7 +10,7 @@ from PIL import Image, ImageTk, ImageDraw, ImageOps
 import logging
 
 from track import Hloc
-from navigation import Trajectory,actions,command_debug
+from navigation import Trajectory,actions,command_debug, command_count
 from visualization.destination_selection import Destination_window
 
 import argparse
@@ -20,8 +20,8 @@ import yaml
 import loader
 
 class Main_window(ttk.Frame):
-    image_types=['.jpg', '.png', '.jpeg', '.JPG', '.PNG']
-    def __init__(self, master, map_data=None,hloc=None,trajectory=None,**config):
+    image_types=['.jpg', '.png', '.jpeg', '.JPG', '.PNG','.HEIC']
+    def __init__(self,master, map_data=None,hloc=None,trajectory=None,**config):
         ttk.Frame.__init__(self, master=master)
         self.config=config
         self.map_data=map_data
@@ -40,6 +40,8 @@ class Main_window(ttk.Frame):
         self.hloc=hloc
         self.trajectory=trajectory
         self.destination=[]
+        self.initial=False
+        self.halfway = False
         self.GT=None
         self.retrieval=True
         self.__layout_design()
@@ -83,8 +85,7 @@ class Main_window(ttk.Frame):
         self.lb.config(yscrollcommand=self.scrollbar.set)
         self.scrollbar.config(command=self.lb.yview)
 
-        self.lb.bind('<Double-Button-1>', lambda event, action='double':
-        self.animate(action))
+        self.lb.bind('<Double-Button-1>', lambda event, action='double':self.animate(action))
         self.lb.bind('<Up>', lambda event, action='up':
         self.animate(action))
         self.lb.bind('<Down>', lambda event, action='down':
@@ -169,6 +170,8 @@ class Main_window(ttk.Frame):
         self.myvar1.grid(row=0, column=4, columnspan=1, rowspan=40, sticky="snew")
         self.myvar1.bind('<Double-Button-1>', lambda event, action='double':
                             self.select_destination(action))
+        
+        self.length = 0
 
     def __clear_destination(self):
         self.destination=[]
@@ -434,7 +437,18 @@ class Main_window(ttk.Frame):
                     self.paths+=path_list
 
             action_list=actions(self.pose,self.paths,self.map_scale)
-            self.instruction_message=command_debug(action_list)
+            length = action_list[0][1]
+            if not self.initial:
+                self.instruction_message=command_debug(action_list)
+                self.initial = True
+                self.base_len=length
+            else:
+                try:
+                    self.instruction_message,self.halfway=command_count(self,action_list,length)
+                except:
+                    print(action_list)
+
+                
             x, y, an = self.pose
             print("x="+str(x)+", y="+str(y)+", angle="+str(an))
             self.logger.info(f"===============================================\n                                                       {self.instruction_message}\n                                                       ===============================================")

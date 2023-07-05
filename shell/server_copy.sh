@@ -1,8 +1,8 @@
 #!/bin/bash
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-script="$CURRENT_DIR/../src/server.py"
-server_config="$CURRENT_DIR/../configs/server.yaml"
+script="$CURRENT_DIR/../src/server_copy.py"
+server_config="$CURRENT_DIR/../configs/server_copy.yaml"
 hloc_config="$CURRENT_DIR/../configs/hloc.yaml"
 
 conda activate UNav
