@@ -26,7 +26,6 @@ class Hloc():
         local_feature = Local_extractor(feature_configs['local'])
         self.local_feature_extractor = local_feature.extractor()
         self.local_feature_matcher=Local_matcher(map_data['database_name'],map_data['local_descriptor'],map_data['registered_feature'],**feature_configs)
-
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
         console_handler = logging.StreamHandler()
@@ -48,18 +47,44 @@ class Hloc():
         topk = torch.topk(sim, self.config['retrieval_num'], dim=1).indices.cpu().numpy()
         return topk
 
-    def feature_matching(self,image,topk):
+    def feature_matching_lightglue(self,image,topk):
         """
         Local Feature Matching:
             Match the local features between query image and retrieved database images
         """
-        feats0 = self.local_feature_extractor(image)
+        with torch.inference_mode():  # Use torch.no_grad during inference
+            feats0 = self.local_feature_extractor(image)
         pts0_list,pts1_list,lms_list=[],[],[]
         max_len=0
         self.retrived_image_index=[]
         for i in topk[0]:
-            # pts0,pts1,lms=self.local_feature_matcher.superglue(i, feats0)
             pts0,pts1,lms=self.local_feature_matcher.lightglue(i, feats0)
+            feat_inliner_size=pts0.shape[0]
+            if feat_inliner_size>self.thre:
+                pts0_list.append(pts0)
+                pts1_list.append(pts1)
+                lms_list.append(lms)
+                self.retrived_image_index.append(i)
+                if feat_inliner_size>max_len:
+                    max_len=feat_inliner_size
+            del pts0,pts1,lms
+        self.retrived_image_index=torch.tensor(self.retrived_image_index).to(self.device)
+        del self.query_desc, feats0
+        torch.cuda.empty_cache()
+        return pts0_list,pts1_list,lms_list,max_len
+    
+    def feature_matching_superglue(self,image,topk):
+        """
+        Local Feature Matching:
+            Match the local features between query image and retrieved database images
+        """
+        with torch.inference_mode():  # Use torch.no_grad during inference
+            feats0 = self.local_feature_extractor(image)
+        pts0_list,pts1_list,lms_list=[],[],[]
+        max_len=0
+        self.retrived_image_index=[]
+        for i in topk[0]:
+            pts0,pts1,lms=self.local_feature_matcher.superglue(i, feats0)
             feat_inliner_size=pts0.shape[0]
             if feat_inliner_size>self.thre:
                 pts0_list.append(pts0)
@@ -70,6 +95,7 @@ class Hloc():
                     max_len=feat_inliner_size
         self.retrived_image_index=torch.tensor(self.retrived_image_index).to(self.device)
         del self.query_desc, feats0
+        torch.cuda.empty_cache()
         return pts0_list,pts1_list,lms_list,max_len
 
     def geometric_verification(self,pts0_list,pts1_list,lms_list,max_len):
@@ -184,6 +210,9 @@ class Hloc():
             #     valid_values = i[mask]
             #     sum_num+=sum(valid_values<1.6)
             # print('matched:%d'%sum_num)
+        # Move tensors to CPU after use and delete their references
+        del fts0, desc0, fts1, desc1  
+        torch.cuda.empty_cache()  # Empty the GPU cache
         exit()
         # Calculate sizes for each item in the batch
         sizes = diag_masks.sum(-1)
@@ -230,11 +259,18 @@ class Hloc():
 
         if self.match_type=='superglue':
             self.logger.info("Matching local feature")
-            pts0_list,pts1_list,lms_list,max_len=self.feature_matching(image,topk)
+            pts0_list,pts1_list,lms_list,max_len=self.feature_matching_superglue(image,topk)
 
             self.logger.info("Start geometric verification")
             feature2D,landmark3D=self.geometric_verification(pts0_list, pts1_list, lms_list,max_len)
-            
+        
+        elif self.match_type=='lightglue':
+            self.logger.info("Matching local feature")
+            pts0_list,pts1_list,lms_list,max_len=self.feature_matching_lightglue(image,topk)
+
+            self.logger.info("Start geometric verification")
+            feature2D,landmark3D=self.geometric_verification(pts0_list, pts1_list, lms_list,max_len)
+
         elif self.match_type=='nvs':
             self.logger.info("Doing NVS+OT")
             feature2D,landmark3D=self.nvs_ot(image,topk)

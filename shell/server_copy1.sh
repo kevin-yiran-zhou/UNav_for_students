@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-script="$CURRENT_DIR/../src/server.py"
+script="$CURRENT_DIR/../src/server_copy1.py"
 server_config="$CURRENT_DIR/../configs/server.yaml"
 hloc_config="$CURRENT_DIR/../configs/hloc.yaml"
 

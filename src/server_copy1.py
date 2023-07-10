@@ -17,7 +17,46 @@ def main(root,hloc_config,server_config):
     newConnectionsThread=server.set_new_connections(map_data)
     newConnectionsThread.start()
 
+def test():
+    host = '128.122.136.173'  # Server IP address
+    port = 30002  # Server port number
+
+    # Create a socket object
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Bind the socket to a specific address and port
+    server_socket.bind((host, port))
+
+    # Listen for incoming connections
+    server_socket.listen(1)
+
+    print('Server listening on {}:{}'.format(host, port))
+
+    # Accept a client connection
+    client_socket, client_address = server_socket.accept()
+    print('Connected to client:', client_address)
+
+    try:
+        # Receive data from the client
+        data = client_socket.recv(1024)
+        received_message = data.decode('utf-8')
+        print('Received data:', received_message)
+
+        # Send a response back to the client
+        response = 'Response from Python server: ' + received_message
+        client_socket.send(response.encode('utf-8'))
+
+    except Exception as e:
+        print('Error:', e)
+
+    finally:
+        # Close the socket connection
+        client_socket.close()
+        server_socket.close()
+        print('Socket connection closed')
+
 if __name__=='__main__':
+    test()
     root = dirname(realpath(__file__)).replace('/src','')
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--server_config', type=str, default='configs/server.yaml')

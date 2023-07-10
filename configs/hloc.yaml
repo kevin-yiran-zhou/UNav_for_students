@@ -1,9 +1,9 @@
 hloc:
   retrieval_num: 50
-  implicit_num: 4
+  implicit_num: 1
   ransac_thre: 30
   # match_type: 'nvs' 
-  match_type: 'superglue'
+  match_type: 'lightglue'
 
 feature:
   global:

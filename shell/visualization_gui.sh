@@ -7,4 +7,4 @@ hloc_config="$CURRENT_DIR/../configs/hloc.yaml"
 
 conda activate UNav
 
-CUDA_VISIBLE_DEVICES=1 python $script -v $visual_config -l $hloc_config
+CUDA_VISIBLE_DEVICES=0 python $script -v $visual_config -l $hloc_config

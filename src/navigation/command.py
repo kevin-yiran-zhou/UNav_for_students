@@ -8,7 +8,6 @@ console_handler.setLevel(logging.DEBUG)
 console_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(console_format)
 logger.addHandler(console_handler)
-step = 0.68
 
 def actions(current_pose,path_list,scale):
     xc, yc, an = current_pose
@@ -36,16 +35,22 @@ def get_direction(rot_clock):
         direction = "turn left"
     return direction
 
+def clean(rot_clock):
+    if rot_clock % 3 <= 1 or rot_clock % 3 >= 2:
+        return True
+    else:
+        return False
+
 def command_debug(action_list):
     message = ''
     for i, ac in enumerate(action_list):
         rot_clock, distance = ac
-        if rot_clock-int(rot_clock)==0.5:
-            message += 'Please walk %.1f meters along %d point 5 clock' % (
-                distance, int(rot_clock))
-        else:
-            message += 'Please walk %.1f meters along %d clock' % (
-                distance, int(rot_clock))
+        direction = get_direction(rot_clock)   #go straight, right, left
+        # distance = round(distance*3.28,1)
+        distance = int(distance*3.28)
+        message += f"please {direction} and walk {distance} feet along {int(rot_clock)} o'clock direction. "
+        # message += 'Please walk %.1f meters along %d clock' % (
+        #     distance, int(rot_clock))
         if i < len(action_list) - 1:
             message += '. Then '
         else:
@@ -54,45 +59,40 @@ def command_debug(action_list):
 
 def command_alert(action_list):
     message = ''
-    rot_clock,next_distance=action_list[0]
-    direction = get_direction(rot_clock)
-    next_station='your destination' if len(action_list)==1 else ''
-    if next_station=='your destination' and next_distance<1:
+    rot_clock,next_distance=action_list[0]  #define actionlist
+    direction = get_direction(rot_clock)    #get direction
+    next_station='your destination' if len(action_list)==1 else '' #arrive at destination
+    if next_station=='your destination' and next_distance<1:        
         message='You have arrived your destination'
-    else:
-        if rot_clock-int(rot_clock)==0.5:
-            message += 'Alert!!!!!!! %s to %d point 5 clock, and walk %d steps ' % (
-                direction, int(rot_clock), int(next_distance/step))
-        else:
-            message += 'Alert!!!!!!! %s to %d clock, and walk %d steps ' % (
-                direction, int(rot_clock), int(next_distance/step))
+    else:                                               
+        # next_distance = round(next_distance*3.28,1)                 #not arrived at destination yet    
+        next_distance = int(next_distance*3.28)                                              
+        message += f"{direction} to {int(rot_clock)} o'clock, and walk {next_distance} feet. "
+        # message += 'Alert!!!!!!! %s to %d clock, and walk %d steps ' % (
+        #     direction, int(rot_clock), int(next_distance/0.55))
         if next_station=='':
             rot_clock,next_distance=action_list[1]
             direction = get_direction(rot_clock)
             next_station='your destination' if len(action_list)==2 else ''
-            if rot_clock-int(rot_clock)==0.5:
-                message += 'And then %s to %d point 5 clock, and walk %d steps ' % (
-                    direction, int(rot_clock), int(next_distance/step))
-            else:
-                message += 'And then %s to %d clock, and walk %d steps ' % (
-                    direction, int(rot_clock), int(next_distance/step))
-            if next_distance<5:
-                if next_station=='your destination':
-                    message +=' to arrive '+next_station
-                else:
-                    rot_clock,next_distance=action_list[2]
-                    direction = get_direction(rot_clock)
-                    if rot_clock-int(rot_clock)==0.5:
-                        message += ', and then %s to %d point 5 clock' % (
-                            direction, int(rot_clock))
-                    else:
-                        message += ', and then %s to %d clock' % (
-                            direction, int(rot_clock))
-            else:
-                if next_station=='your destination':
-                    message +=' to arrive '+next_station
-                else:
-                    message +=next_station
+            # message += f" Then {direction} to {int(rot_clock)} o'clock, and walk {int(next_distance*3.28)} feet. "
+            message += f" Then {direction}. "
+            # message += 'And then %s to %d clock, and walk %d steps ' % (
+            #     direction, int(rot_clock), int(next_distance/0.55))
+            # if next_distance<5:
+            #     if next_station=='your destination':
+            #         message +=' to arrive at '+next_station
+            #     else:
+            #         rot_clock,next_distance=action_list[2]
+            #         direction = get_direction(rot_clock)
+                
+            #     # message += f"head to your {direction} at {int(rot_clock)} o'clock direction"
+            #         # message += ', and then %s to %d clock' % (
+            #         #     direction, int(rot_clock))
+            # else:
+            #     if next_station=='your destination':
+            #         message +=' to arrive at '+next_station
+            #     else:
+            #         message +=next_station
         else:
             message +=' to approach '+next_station
     return message
@@ -102,54 +102,38 @@ def command_normal(action_list):
     rot_clock,next_distance=action_list[0]
     direction = get_direction(rot_clock)
     next_station='your destination' if len(action_list)==1 else ''
-    if rot_clock-int(rot_clock)==0.5:
-        message += '%s to %d point 5 clock, and walk %d steps' % (
-            direction, int(rot_clock), int(next_distance/step))
-    else:
-        message += '%s to %d clock, and walk %d steps' % (
-            direction, int(rot_clock), int(next_distance/step))
+    message += f"{direction} at {int(rot_clock)} o'clock direction, and walk {int(next_distance*3.28)} feet. "
+    # message += '%s to %d clock, and walk %d steps' % (
+    #     direction, int(rot_clock), int(next_distance/0.55))
     if next_station=='':
         message += next_station
     else:
         message +=' to approach '+ next_station
     return message
 
-def command_type3(current_pose,path_list,scale):
-    if current_pose:
-        if len(path_list) > 0:
-            action_list=actions(current_pose,path_list,scale)
-            whole_message = ''
-            got_message = False
-            for i, ac in enumerate(action_list):
-                rot_clock, distance = ac
-                direction = get_direction(rot_clock)
-                if rot_clock-int(rot_clock)==0.5:
-                    # message = 'Please %s and walk %.1f meters along %d point 5 clock.' % (direction, distance, int(rot_clock))
-                    message = 'Please %s and walk %d feet along %d point 5 clock.' % (direction, int(distance/0.3048), int(rot_clock))
-                else:
-                    # message = 'Please %s walk %.1f meters along %d clock.' % (direction, distance, int(rot_clock))
-                    message = 'Please %s and walk %d feet along %d clock.' % (direction, int(distance/0.3048), int(rot_clock))
-                if i < len(action_list) - 1:
-                    rot_clock_next, distance_next = action_list[i+1]
-                    direction_next = get_direction(rot_clock_next)
-                    if distance <= 2:
-                        message = 'Please %s. ' % (diection_next)
-                    else:
-                        message += 'Then %s. ' % (direction_next)
-                else:
-                    message += 'And you will arrive the destination.'
-                message += '\n'
-                whole_message += message
-                if not got_message:
-                    result_message = message
-                    got_message = True
-            print(whole_message)
-            return result_message
-        else:
-            result_message = 'There is no path to the destination. \n'
-            print(result_message)
-            return result_message
+
+def command_count(parent,action_list,length):
+    result_message = ''
+    rot_clock,next_distance=action_list[0]
+    direction = get_direction(rot_clock)
+    if not parent.halfway: #for counting halfway only once: the first time reaching this area
+        percentage = int(length/parent.base_len*100)
+        if percentage>=40 and percentage<=60:
+            parent.halfway = True
+            lenFeetLeft = int((parent.base_len-length)*3.28)
+            # result_message = 'you have walked {lenFeet} feet, halfway there for next intruction \n'
+            result_message = f'{lenFeetLeft} feet left for next intruction \n'
+        # elif percentage>=75 and percentage<=85:
+        #     parent.eighty_way = True
+        #     # remain = round((parent.base_len-length)*3.28,1)
+        #     remain = int((parent.base_len-length)*3.28)
+        #     result_message = f'you are almost there, {remain} feet remain \n'
     else:
-        result_message = 'Cannot localize. \n'
-        print(result_message)
-        return result_message
+        if length<2:
+            if len(action_list)>1:
+                result_message=f"{direction} at {int(action_list[1][0])} o'clock direction "
+            else:
+                result_message="You have arrived at your destination"
+    
+    return result_message
+    

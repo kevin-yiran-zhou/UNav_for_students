@@ -4,6 +4,7 @@ import yaml
 import socket
 from conversation import Server,Connected_Client,utils
 import loader
+import torch
 
 def get_server(root,map_data,hloc_config,server_config):
     # IFACE = utils.get_wireless_iface()

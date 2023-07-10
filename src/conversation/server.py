@@ -5,16 +5,15 @@ import torch
 from os.path import join, exists
 from os import makedirs, mkdir
 from track import Hloc
-from navigation import Trajectory,actions,command_alert,command_normal
+from navigation import Trajectory,actions,command_alert,command_normal, command_debug, command_count
 import numpy as np
 import cv2
 import jpysocket
 from time import time
 from datetime import datetime
 
-
 class Connected_Client(threading.Thread):
-    def __init__(self, socket=None, address='128.122.136.173', hloc=None,trajectory=None, connections=None, destinations=None, map_scale=1,log_dir=None, logger=None):
+    def __init__(self, parent,socket=None, address='128.122.136.173', hloc=None,trajectory=None, connections=None, destinations=None, map_scale=1,log_dir=None, logger=None,initial=False):
         threading.Thread.__init__(self)
         self.socket = socket
         self.address = address
@@ -40,6 +39,7 @@ class Connected_Client(threading.Thread):
         self.log_dir = log_dir
         self.logger = logger
         self.map_scale=map_scale
+        self.parent=parent
 
     def __str__(self):
         return str(self.id) + " " + str(self.address)
@@ -60,6 +60,7 @@ class Connected_Client(threading.Thread):
     def run(self):
         while self.signal:
             # try:
+            self.logger.debug("Waiting to receiver number")
             number = self.recvall(self.socket, 4)
             if not number:
                 continue
@@ -100,25 +101,28 @@ class Connected_Client(threading.Thread):
                 cv2.imwrite(
                     join(image_destination, formatted_date+'.png'), img)
                 if pose:
-                    
                     self.logger.info(f"===============================================\n                                                       Estimated location: x: %d, y: %d, ang: %d\n                                                       Used {image_num} images for localization\n                                                       ===============================================" % (
                         pose[0], pose[1], pose[2]))
                     path_list=self.trajectory.calculate_path(pose[:2], destination_id)
                     if len(path_list) > 0:
                         action_list=actions(pose,path_list,self.map_scale)
-                        _,next_distance=action_list[0]
-                        if next_distance < 5:
-                            message=command_alert(action_list)
-                        elif current_time-self.hloc.last_time>5 or image_num==1:
+                        length = action_list[0][1]
+                        if len(action_list) != self.parent.actionlines:
+                            self.parent.actionlines = len(action_list)
+                            self.parent.halfway = False
+                            self.parent.eighty_way = False
                             message=command_normal(action_list)
-                            self.hloc.last_time=current_time
+                            self.parent.base_len=length
+                        elif length < 5:
+                            message=command_alert(action_list)
                         else:
-                            message=''
+                            message=command_count(self.parent,action_list,length)
+                            # message=command_normal(action_list)
                         message+='\n'
                     else:
                         message = 'There is no path to the destination. \n'
                 else:
-                    message = "Cannot localize at this point. Please take some steps or turn around. \n"        
+                    message = "Look another direction. \n"        
 
                 self.logger.info(f"===============================================\n                                                       {message}\n                                                       ===============================================")
                 self.socket.sendall(bytes(message, 'UTF-8'))
@@ -132,16 +136,20 @@ class Connected_Client(threading.Thread):
                 self.logger.info('=====Send destination to Client=====')
                 destination_dicts = str(self.destinations_dicts) + '\n'
                 self.socket.sendall(bytes(destination_dicts, 'UTF-8'))
-            # except:
-            #     self.logger.warning("Client " + str(self.address) + " has disconnected")
-            #     self.signal = False
-            #     self.connections.remove(self)
-            #     break
-
+            
+            elif command == 2:
+                self.logger.debug("Number 2 sent to server")
+                return
+            """
+            except:
+                self.logger.warning("Client " + str(self.address) + " has disconnected")
+                self.signal = False
+                self.connections.remove(self)
+                break
+            """
 
 class Server():
     device = 'cuda' if torch.cuda.is_available() else "cpu"
-
     def __init__(self, root, map_data, hloc_config, server_config):
         location_config = server_config['location']
         self.log_path = join(server_config['IO_root'], 'logs', location_config['place'],
@@ -166,15 +174,21 @@ class Server():
         console_handler.setFormatter(console_format)
         self.logger.addHandler(console_handler)
         self.logger.info(f'Setup server at address:{host} port:{port}')
+        self.halfway = False
+        self.eighty_way = False
+        self.actionlines = -100
 
     def set_new_connections(self, map_data):
         return threading.Thread(target=self.run, args=(map_data,))
 
     def run(self, map_data):
         while True:
+            for index in range(len(self.connections)):
+                if not self.connections[index].is_alive():
+                    self.logger.debug(f"Dead thread index: {index}")
             sock, address = self.sock.accept()
             self.connections.append(
-                Connected_Client(socket=sock, address=address, hloc=self.hloc,trajectory=self.trajectory, connections=self.connections,
+                Connected_Client(parent=self,socket=sock, address=address, hloc=self.hloc,trajectory=self.trajectory, connections=self.connections,
                                  destinations=map_data['destinations'], map_scale=self.scale, log_dir=self.log_path, logger=self.logger))
             self.connections[len(self.connections) - 1].start()
             self.logger.info("New connection at ID " +
