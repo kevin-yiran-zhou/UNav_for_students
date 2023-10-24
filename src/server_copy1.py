@@ -16,10 +16,12 @@ def main(root,hloc_config,server_config):
     server = get_server(root,map_data,hloc_config,server_config)
     newConnectionsThread=server.set_new_connections(map_data)
     newConnectionsThread.start()
+    
+
 
 def test():
     host = '128.122.136.173'  # Server IP address
-    port = 30002  # Server port number
+    port = 30001  # Server port number
 
     # Create a socket object
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

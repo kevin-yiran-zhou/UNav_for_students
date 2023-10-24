@@ -9,6 +9,7 @@ from navigation import Trajectory,actions,command_alert,command_normal, command_
 import numpy as np
 import cv2
 import jpysocket
+import chardet
 from time import time
 from datetime import datetime
 
@@ -56,6 +57,14 @@ class Connected_Client(threading.Thread):
 
     def date(self, s):
         return [s.year, s.month, s.day, s.hour, s.minute, s.second]
+    
+    def get_alert_distance(self, segment_length, frequency_mode):
+        if frequency_mode == "high":
+            return max(3, (4*segment_length)**0.5)
+        elif frequency_mode == "normal":
+            return max(3, (2*segment_length)**0.5)
+        else: #low
+            return max(3, (0.5*segment_length)**0.5)
 
     def run(self):
         while self.signal:
@@ -65,7 +74,40 @@ class Connected_Client(threading.Thread):
             if not number:
                 continue
             command = int.from_bytes(number, 'big')
-            if command == 1:
+            instruction_modes = ["overviews", "overview + segments", "segments"]
+            frequency_modes = ["high", "normal", "low"]
+            if command >= 10: #for app
+                print(command)
+                #instruction_modes = ["overviews", "overview + segments", "segments"]
+                instruction_mode = instruction_modes[command//10 - 1]
+                self.logger.info('Instuction mode: '+instruction_mode)
+                #frequency_modes = ["high", "normal", "low"]
+                frequency_mode = frequency_modes[command%10 - 1]
+                self.logger.info('Alert distance '+frequency_mode)
+                if instruction_mode == "overview + segments":
+                    not_overviewed = True
+                self.logger.info('=====Send destination to Client=====')
+                destination_dicts = str(self.destinations_dicts) + '\n'
+                ###
+                # data_bytes = bytes(destination_dicts, 'UTF-8')
+                # self.logger.info(destination_dicts)
+                # self.socket.sendall(len(data_bytes).to_bytes(4,'big'))
+                ###
+                self.socket.sendall(bytes(destination_dicts, 'UTF-8'))
+            elif command == 3:#for jetson
+                self.logger.info('=====Send destination to Client=====')
+                destination_dicts = str(self.destinations_dicts) + '\n'
+                data_bytes = bytes(destination_dicts, 'UTF-8')
+                self.logger.info(destination_dicts)
+                self.socket.sendall(len(data_bytes).to_bytes(4,'big'))
+                self.socket.sendall(bytes(destination_dicts, 'UTF-8'))
+                instruction_mode = instruction_modes[2]
+                frequency_mode = frequency_modes[1]
+            elif command == 2:
+                self.logger.debug("Number 2 sent to server")
+                return
+            
+            elif command == 1:
                 self.logger.info('===========Loading image===========')
                 length = self.recvall(self.socket, 4)
                 data = self.recvall(self.socket, int.from_bytes(length, 'big'))
@@ -73,10 +115,16 @@ class Connected_Client(threading.Thread):
                     continue
                 nparr = np.frombuffer(data, np.uint8)
                 img = cv2.imdecode(nparr, cv2.IMREAD_UNCHANGED)
-                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
                 Destination = self.socket.recv(4096)
-                Destination = jpysocket.jpydecode(Destination)
+                Destination = str(Destination)[7:]
+                end_index = Destination.find('\\')
+                if end_index == -1:
+                    end_index = len(Destination) - 1
+                Destination = Destination[:end_index].strip()
+                # Destination = jpysocket.jpydecode(Destination)
+                self.logger.info('Destination: '+Destination)
                 Place, Building, Floor, Destination_ = Destination.split(',')
                 dicts = self.destination[Place][Building][Floor]
                 for i in dicts:
@@ -104,25 +152,58 @@ class Connected_Client(threading.Thread):
                     self.logger.info(f"===============================================\n                                                       Estimated location: x: %d, y: %d, ang: %d\n                                                       Used {image_num} images for localization\n                                                       ===============================================" % (
                         pose[0], pose[1], pose[2]))
                     path_list=self.trajectory.calculate_path(pose[:2], destination_id)
-                    if len(path_list) > 0:
+                    if len(path_list) > 0: # have path                        
+                        fail_count = 0
                         action_list=actions(pose,path_list,self.map_scale)
-                        length = action_list[0][1]
-                        if len(action_list) != self.parent.actionlines:
-                            self.parent.actionlines = len(action_list)
-                            self.parent.halfway = False
-                            self.parent.eighty_way = False
-                            message=command_normal(action_list)
-                            self.parent.base_len=length
-                        elif length < 5:
-                            message=command_alert(action_list)
+                        if instruction_mode == "overviews":
+                            message = command_debug(action_list)
+                        elif instruction_mode == "overview + segments" and not_overviewed: 
+                            message = command_debug(action_list)
+                            not_overviewed = False
+                        else: # no overview
+                            length = action_list[0][1]
+                            if len(action_list) != self.parent.actionlines: # in the first segment or in a new segment
+                                self.parent.actionlines = len(action_list)
+                                self.parent.halfway = False
+                                self.parent.eighty_way = False
+                                self.parent.base_len=length
+                                self.parent.alert_distance = self.get_alert_distance(length, frequency_mode)
+                                if length < self.parent.alert_distance:
+                                    message=command_alert(action_list)
+                                else:
+                                    message=command_normal(action_list)
+                            elif length < self.parent.alert_distance:
+                                message=command_alert(action_list)
+                            else:
+                                message=command_count(self.parent,action_list,length)
+                            message+='\n'
+                    else: # no path
+                        # message = 'There is no path to the destination. \n'
+                        try:
+                            fail_count
+                        except NameError:
+                            fail_count = 1
                         else:
-                            message=command_count(self.parent,action_list,length)
-                            # message=command_normal(action_list)
-                        message+='\n'
+                            fail_count += 1
+                        print(f"failed {fail_count} times in a row")
+                        if fail_count == 3:
+                            message = "Look another direction. \n"
+                            fail_count = 0
+                        else:
+                            message = "\n"
+                else: # failed localization
+                    try:
+                        fail_count
+                    except NameError:
+                        fail_count = 1
                     else:
-                        message = 'There is no path to the destination. \n'
-                else:
-                    message = "Look another direction. \n"        
+                        fail_count += 1
+                    print(f"failed {fail_count} times in a row")
+                    if fail_count == 3:
+                        message = "Look another direction. \n"
+                        fail_count = 0
+                    else:
+                        message = "\n"
 
                 self.logger.info(f"===============================================\n                                                       {message}\n                                                       ===============================================")
                 self.socket.sendall(bytes(message, 'UTF-8'))
@@ -131,15 +212,6 @@ class Connected_Client(threading.Thread):
                     if pose:
                         file.write(str(pose[0])+', '+str(pose[1])+'\n')
                     file.write(message)
-
-            elif command == 0:
-                self.logger.info('=====Send destination to Client=====')
-                destination_dicts = str(self.destinations_dicts) + '\n'
-                self.socket.sendall(bytes(destination_dicts, 'UTF-8'))
-            
-            elif command == 2:
-                self.logger.debug("Number 2 sent to server")
-                return
             """
             except:
                 self.logger.warning("Client " + str(self.address) + " has disconnected")
@@ -161,9 +233,14 @@ class Server():
         server_configs = server_config['server']
         host = server_configs['host']
         port = server_configs['port']
+        ###
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.bind((host, port))
         self.sock.listen(5)
+        ###
+        # self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # self.sock.bind((host, port))
+        ###
         self.connections = []
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
@@ -177,6 +254,7 @@ class Server():
         self.halfway = False
         self.eighty_way = False
         self.actionlines = -100
+        self.alert_distance = 5
 
     def set_new_connections(self, map_data):
         return threading.Thread(target=self.run, args=(map_data,))
@@ -187,6 +265,7 @@ class Server():
                 if not self.connections[index].is_alive():
                     self.logger.debug(f"Dead thread index: {index}")
             sock, address = self.sock.accept()
+            # sock, address = self.sock.recvfrom(1024)
             self.connections.append(
                 Connected_Client(parent=self,socket=sock, address=address, hloc=self.hloc,trajectory=self.trajectory, connections=self.connections,
                                  destinations=map_data['destinations'], map_scale=self.scale, log_dir=self.log_path, logger=self.logger))

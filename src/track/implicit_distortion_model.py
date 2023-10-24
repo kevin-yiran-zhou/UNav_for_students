@@ -36,7 +36,7 @@ def pose_refine(out, p2d_inlier, p3d_inlier):
     tvec, qvec = colmap2world(tvec, qvec)
     return tvec, qvec
 
-def pose_multi_refine(list_2d, list_3d, initial_poses, pps,rot_base,T):
+def pose_multi_refine(list_2d, list_3d, initial_poses, pps, rot_base, T, simple_pose):
     cm_opt = pyimplicitdist.CostMatrixOptions()
     refinement_opt = pyimplicitdist.PoseRefinementOptions()
     invalid_id, list_2d_valid, list_3d_valid, initial_poses_valid, pps_valid = [], [], [], [], []
@@ -69,8 +69,52 @@ def pose_multi_refine(list_2d, list_3d, initial_poses, pps,rot_base,T):
             qvecs.append('None')
             tvecs.append('None')
     tvec, qvec = tvecs[-1], qvecs[-1]
-    x_, _, y_ = tvec
-    ang = ((-qvec[1] - rot_base)* 180 / np.pi)%360
-    tvec = T @ np.array([[x_], [y_], [1]])
-    x_, y_ = tvec.tolist()
-    return [x_[0],y_[0],ang]
+    if simple_pose:
+        x_, _, y_ = tvec
+        ang = ((-qvec[1] - rot_base)* 180 / np.pi)%360
+        tvec = T @ np.array([[x_], [y_], [1]])
+        x_, y_ = tvec.tolist()
+        return [x_[0],y_[0],ang]
+    else:
+        """
+        qvec is a rotation vector determined according (roughly, for accuracy use -rot_base rotation around vertical axis)
+        to basis x = -y_f, y = -z_f, z = -x_f (with respect to floorplan basis)
+        [[0, 0, -1]
+         [-1, 0, 0]
+         [0, -1, 0]]
+        We need to transform qvec into the floorplan's basis according to this knowledge
+        """
+        y_flip = np.array([[1, 0, 0],
+                           [0, -1, 0],
+                           [0, 0, 1]])
+        y_down = R.from_rotvec([np.pi / 2, 0, 0]).as_matrix() @ y_flip
+        rotate_to_world = R.from_rotvec([0, 0, rot_base]).as_matrix() @ y_down
+        world_pose = (rotate_to_world @ qvec.reshape(3,1)).reshape(3)
+        # Transform coordinates to floorplan bases
+        x_pos, z_pos, y_pos = tvec
+        world_coor = np.append(T @ np.array([[x_pos], [y_pos], [1]]), [[z_pos]], 0)
+        return np.append(world_coor.transpose(), world_pose).tolist()
+    
+
+#     public class Main {
+#     public static void main(String[] args) {
+#         // Initialize the Kalman Filter
+#         double initialX = 0.0;
+#         double initialP = 1.0;
+#         double processNoise = 0.01;
+#         double measurementNoise = 0.1;
+#         KalmanFilter kalmanFilter = new KalmanFilter(initialX, initialP, processNoise, measurementNoise);
+
+#         // Simulate measurements and filter updates
+#         double[] measurements = {     };      // original is an exampke{1.1, 1.2, 1.3, 1.4}
+#         for (double measurement : measurements) {
+#             // Predict the next state
+#             kalmanFilter.predict();
+
+#             // Update the state based on the measurement
+#             double filteredValue = kalmanFilter.update(measurement);
+
+#             System.out.println("Measurement: " + measurement + " Filtered Value: " + filteredValue);
+#         }
+#     }
+# }

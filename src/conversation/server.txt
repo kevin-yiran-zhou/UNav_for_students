@@ -1,0 +1,8 @@
+# got path
+first_length = path[0][1]
+if first_legnth > 100:
+    target = 5
+elif first_length > 20:
+    target = 0.2 * first_length
+else: #<20
+    target = 0.3 * first_length

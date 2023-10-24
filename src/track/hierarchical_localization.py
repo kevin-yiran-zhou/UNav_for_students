@@ -14,8 +14,10 @@ class Hloc():
     device='cuda' if torch.cuda.is_available() else "cpu"
     def __init__(self, root, map_data, config):
         self.config=config['hloc']
+        self.batch_mode=self.config['batch_mode']
         self.thre=self.config['ransac_thre']
         self.match_type=self.config['match_type']
+        self.simple_pose = self.config["simple_pose"]
         self.rot_base=map_data['rot_base']
         self.T=map_data['T']
         self.db_desc=map_data['global_descriptor']
@@ -46,6 +48,18 @@ class Hloc():
         sim = torch.einsum('id,jd->ij', self.query_desc, self.db_desc)
         topk = torch.topk(sim, self.config['retrieval_num'], dim=1).indices.cpu().numpy()
         return topk
+
+    def feature_matching_lightglue_batch(self,image,topk):
+        """
+        Local Feature Matching:
+            Match the local features between query image and retrieved database images
+        """
+        with torch.inference_mode():  # Use torch.no_grad during inference
+            feats0 = self.local_feature_extractor(image)
+        self.retrived_image_index=[]
+        pts0_list,pts1_list,lms_list,max_len=self.local_feature_matcher.lightglue_batch(self,topk[0], feats0)
+        self.retrived_image_index=torch.tensor(self.retrived_image_index).to(self.device)
+        return pts0_list,pts1_list,lms_list,max_len
 
     def feature_matching_lightglue(self,image,topk):
         """
@@ -134,8 +148,8 @@ class Hloc():
         diag_masks = diag_masks[valid_indices]
         pts0 = pts0[valid_indices]
         lms = lms[valid_indices]
-        self.retrived_image_index=self.retrived_image_index[valid_indices]
 
+        self.retrived_image_index=self.retrived_image_index[valid_indices]
         # Masking pts0, pts1, and lms
         masked_pts0 = [pts0[i][diag_masks[i]] for i in range(pts0.size(0))]
         masked_lms = [lms[i][diag_masks[i]] for i in range(lms.size(0))]
@@ -240,6 +254,7 @@ class Hloc():
             out, p2d_inlier, p3d_inlier = coarse_pose(feature2D, landmark3D, np.array([width / 2, height / 2]))
             self.list_2d.append(p2d_inlier)
             self.list_3d.append(p3d_inlier)
+            self.matched_2D,self.matched_3D=p2d_inlier,p3d_inlier
             self.initial_poses.append(out['pose'])
             self.pps.append(out['pp'])
             if len(self.list_2d) > self.config['implicit_num']:
@@ -247,7 +262,7 @@ class Hloc():
                 self.list_3d.pop(0)
                 self.initial_poses.pop(0)
                 self.pps.pop(0)
-            pose = pose_multi_refine(self.list_2d, self.list_3d, self.initial_poses, self.pps,self.rot_base,self.T)
+            pose = pose_multi_refine(self.list_2d, self.list_3d, self.initial_poses, self.pps, self.rot_base, self.T, self.simple_pose)
         else:
             pose =None
             self.logger.warning("!!!Cannot localize at this point, please take some steps or turn around!!!")
@@ -266,7 +281,15 @@ class Hloc():
         
         elif self.match_type=='lightglue':
             self.logger.info("Matching local feature")
-            pts0_list,pts1_list,lms_list,max_len=self.feature_matching_lightglue(image,topk)
+            if self.batch_mode:
+                pts0_list,pts1_list,lms_list,max_len=self.feature_matching_lightglue_batch(image,topk)
+            else:
+                pts0_list,pts1_list,lms_list,max_len=self.feature_matching_lightglue(image,topk)
+
+            # for i,(lm,lm1) in enumerate(zip(lms_list,lms_list1)):
+            #     print(lm)
+            #     print(lm1)
+            #     exit()
 
             self.logger.info("Start geometric verification")
             feature2D,landmark3D=self.geometric_verification(pts0_list, pts1_list, lms_list,max_len)
@@ -279,4 +302,3 @@ class Hloc():
         pose=self.pnp(image,feature2D,landmark3D)
 
         return pose
-        

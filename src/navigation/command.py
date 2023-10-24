@@ -17,7 +17,7 @@ def actions(current_pose,path_list,scale):
         distance = np.linalg.norm([xn - xc, yn - yc])
         rot = np.arctan2(xn - xc, yn - yc)/ np.pi * 180+180
         rot_ang = (an - rot) % 360
-        rot_clock = (round(rot_ang.squeeze().tolist() / 15) / 2) % 12
+        rot_clock = (round(rot_ang.squeeze().tolist() / 30)) % 12
         if rot_clock < 1:
             rot_clock += 12
         action_list.append([rot_clock, distance*scale])
@@ -62,7 +62,7 @@ def command_alert(action_list):
     rot_clock,next_distance=action_list[0]  #define actionlist
     direction = get_direction(rot_clock)    #get direction
     next_station='your destination' if len(action_list)==1 else '' #arrive at destination
-    if next_station=='your destination' and next_distance<1:        
+    if next_station=='your destination' and next_distance<2:        
         message='You have arrived your destination'
     else:                                               
         # next_distance = round(next_distance*3.28,1)                 #not arrived at destination yet    
@@ -74,25 +74,7 @@ def command_alert(action_list):
             rot_clock,next_distance=action_list[1]
             direction = get_direction(rot_clock)
             next_station='your destination' if len(action_list)==2 else ''
-            # message += f" Then {direction} to {int(rot_clock)} o'clock, and walk {int(next_distance*3.28)} feet. "
             message += f" Then {direction}. "
-            # message += 'And then %s to %d clock, and walk %d steps ' % (
-            #     direction, int(rot_clock), int(next_distance/0.55))
-            # if next_distance<5:
-            #     if next_station=='your destination':
-            #         message +=' to arrive at '+next_station
-            #     else:
-            #         rot_clock,next_distance=action_list[2]
-            #         direction = get_direction(rot_clock)
-                
-            #     # message += f"head to your {direction} at {int(rot_clock)} o'clock direction"
-            #         # message += ', and then %s to %d clock' % (
-            #         #     direction, int(rot_clock))
-            # else:
-            #     if next_station=='your destination':
-            #         message +=' to arrive at '+next_station
-            #     else:
-            #         message +=next_station
         else:
             message +=' to approach '+next_station
     return message
@@ -102,7 +84,7 @@ def command_normal(action_list):
     rot_clock,next_distance=action_list[0]
     direction = get_direction(rot_clock)
     next_station='your destination' if len(action_list)==1 else ''
-    message += f"{direction} at {int(rot_clock)} o'clock direction, and walk {int(next_distance*3.28)} feet. "
+    message += f"{direction} at {int(rot_clock)} o'clock direction, and walk {int(next_distance*3.28)} feet"
     # message += '%s to %d clock, and walk %d steps' % (
     #     direction, int(rot_clock), int(next_distance/0.55))
     if next_station=='':
@@ -121,13 +103,9 @@ def command_count(parent,action_list,length):
         if percentage>=40 and percentage<=60:
             parent.halfway = True
             lenFeetLeft = int((parent.base_len-length)*3.28)
-            # result_message = 'you have walked {lenFeet} feet, halfway there for next intruction \n'
-            result_message = f'{lenFeetLeft} feet left for next intruction \n'
-        # elif percentage>=75 and percentage<=85:
-        #     parent.eighty_way = True
-        #     # remain = round((parent.base_len-length)*3.28,1)
-        #     remain = int((parent.base_len-length)*3.28)
-        #     result_message = f'you are almost there, {remain} feet remain \n'
+            result_message = f'{lenFeetLeft} feet left \n'
+        else:
+            result_message = '\n'
     else:
         if length<2:
             if len(action_list)>1:

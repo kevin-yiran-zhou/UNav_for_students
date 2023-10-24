@@ -5,8 +5,8 @@ import yaml
 from time import time
 
 
-config={'width_confidence': 0.99,
-        'depth_confidence': 0.95}
+config={'width_confidence': -1,
+        'depth_confidence': -1}
 
 Model_lg=LightGlue(pretrained='superpoint', **config).eval()
 local_feature_matcher = Model_lg.to('cuda')
@@ -17,6 +17,9 @@ map_data=loader.load_data(server_config)
 db_name,hfile_local=map_data['database_name'],map_data['local_descriptor']
 
 feats0=hfile_local[db_name[10]]
+topk_num=40
+
+
 feats1=hfile_local[db_name[1005]]
 
 pred = {
@@ -27,7 +30,7 @@ pred = {k: v.to('cuda') for k, v in pred.items()}
 pred['keypoint_scores0'] = pred.pop('scores0')
 pred['keypoint_scores1'] = pred.pop('scores1')
 
-n = 1  # Number of times to copy
+n = 50  # Number of times to copy
 
 keys = ['descriptors0', 'keypoints0', 'image_size0', 'keypoint_scores0',
         'descriptors1', 'keypoints1', 'image_size1', 'keypoint_scores1']
@@ -38,9 +41,11 @@ for key in keys:
 
 for i in range(10):
     last_time=time()
-    for i in range(40):
-        with torch.inference_mode():
-            pred1 = local_feature_matcher(pred)
+    # for i in range(50):
+    with torch.inference_mode():
+        pred1 = local_feature_matcher(pred)
+        matches = pred1['matches0'].detach().cpu().short().numpy()
+        print(matches.shape)
     current_time=time()
     print(current_time-last_time)
 

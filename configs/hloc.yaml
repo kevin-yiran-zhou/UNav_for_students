@@ -1,9 +1,11 @@
 hloc:
-  retrieval_num: 50
+  retrieval_num: 80
   implicit_num: 1
   ransac_thre: 30
   # match_type: 'nvs' 
   match_type: 'lightglue'
+  batch_mode: false
+  simple_pose: true
 
 feature:
   global:
@@ -21,8 +23,8 @@ feature:
       max_keypoints: 4096
       matcher_name: lightglue
       match_conf:
-        width_confidence: 0.99
-        depth_confidence: 0.95
+        width_confidence: -1
+        depth_confidence: -1
     # superpoint+superglue:
     #   detector_name: superpoint
     #   nms_radius: 4
