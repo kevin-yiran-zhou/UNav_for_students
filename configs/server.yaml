@@ -4,9 +4,15 @@ location:
  floor: '4th_floor'
  scale: 0.01209306372
 
+# location: 
+#  place: New_York_City
+#  building: LightHouse
+#  floor: '6th_floor'
+#  scale: 0.01098358101
+
 server:
   host: "128.122.136.173"
-  port: 30003
+  port: 30002
   feedback_freq: 0.1
   FEC: false
   INFERENCE: false

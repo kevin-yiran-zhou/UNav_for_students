@@ -282,9 +282,9 @@ class Hloc():
         elif self.match_type=='lightglue':
             self.logger.info("Matching local feature")
             if self.batch_mode:
-                pts0_list,pts1_list,lms_list,max_len=self.feature_matching_lightglue_batch(image,topk)
+                pts0_list,pts1_list,lms_list,max_len=self.feature_matching_lightglue_batch(image, topk)
             else:
-                pts0_list,pts1_list,lms_list,max_len=self.feature_matching_lightglue(image,topk)
+                pts0_list,pts1_list,lms_list,max_len=self.feature_matching_lightglue(image, topk)
 
             # for i,(lm,lm1) in enumerate(zip(lms_list,lms_list1)):
             #     print(lm)

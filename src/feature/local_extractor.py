@@ -8,7 +8,7 @@ import cv2
 class Superpoint():
     def __init__(self,device,conf):
         Model_sp = dynamic_load(extractors, conf['detector_name'])
-        self.local_feature_extractor=Model_sp({'name':conf['detector_name'],'nms_radius':conf['nms_radius'],'max_keypoints':conf['max_keypoints']}).eval().to(device)
+        self.local_feature_extractor=Model_sp({'name':conf['detector_name'], **{key: value for key, value in conf.items() if key != "name"}}).eval().to(device)
         self.device=device
 
     def prepare_data(self, image):

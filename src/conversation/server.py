@@ -76,8 +76,8 @@ class Connected_Client(threading.Thread):
             command = int.from_bytes(number, 'big')
             instruction_modes = ["overviews", "overview + segments", "segments"]
             frequency_modes = ["high", "normal", "low"]
-            if command >= 10: #for app
-                print(command)
+            if command >= 10 and command < 40: #for app
+                self.logger.info('Command: '+str(command))
                 #instruction_modes = ["overviews", "overview + segments", "segments"]
                 instruction_mode = instruction_modes[command//10 - 1]
                 self.logger.info('Instuction mode: '+instruction_mode)
@@ -94,7 +94,22 @@ class Connected_Client(threading.Thread):
                 # self.socket.sendall(len(data_bytes).to_bytes(4,'big'))
                 ###
                 self.socket.sendall(bytes(destination_dicts, 'UTF-8'))
+            
+            elif command >= 40 and command < 70: #for jetson
+                self.logger.debug(command)
+                # Map the tens digit to the instruction mode
+                instruction_index = (command // 10) - 4  
+                instruction_mode = instruction_modes[instruction_index]
+                self.logger.info('Instruction mode: ' + instruction_mode)
+                # Map the ones digit to the frequency mode
+                frequency_index = (command % 10) - 1
+                frequency_mode = frequency_modes[frequency_index]
+                self.logger.info('Alert frequency: ' + frequency_mode)
+                if instruction_mode == "overview + segments":
+                    not_overviewed = True  # Assuming this is a flag you want to set
+                self.logger.debug(frequency_mode+instruction_mode)
             elif command == 3:#for jetson
+                self.logger.debug(command)
                 self.logger.info('=====Send destination to Client=====')
                 destination_dicts = str(self.destinations_dicts) + '\n'
                 data_bytes = bytes(destination_dicts, 'UTF-8')
@@ -103,6 +118,7 @@ class Connected_Client(threading.Thread):
                 self.socket.sendall(bytes(destination_dicts, 'UTF-8'))
                 instruction_mode = instruction_modes[2]
                 frequency_mode = frequency_modes[1]
+            
             elif command == 2:
                 self.logger.debug("Number 2 sent to server")
                 return

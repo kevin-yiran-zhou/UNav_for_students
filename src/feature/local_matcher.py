@@ -28,6 +28,7 @@ class Local_matcher():
         lms = lms[:counter]
         return pts0, pts1, lms
 
+
     def lightglue_batch(self,parent, topk, feats0):
         batch_size=len(topk)
         mini_batch_size=15
@@ -60,7 +61,7 @@ class Local_matcher():
                     image_size=feats1[-1]['image_size'].__array__()
                 if max_len<current_len:
                     max_len=current_len
-            index+=batch
+            # index += batch
             if max_dim<max_len:
                 max_dim=max_len
             descriptors=torch.zeros((batch,desc_dim,max_len))
@@ -77,14 +78,14 @@ class Local_matcher():
             pred['image_size1']=torch.tensor(image_size).to(self.device)
             pred['keypoints1']=keypoints.to(self.device)
             pred['keypoint_scores1']=scores.to(self.device)
-
-
+            pred["image0"] = {"descriptors": pred["descriptors0"], "image_size": pred["image_size0"], "keypoints": pred["keypoints0"], "scores": pred["keypoint_scores0"]}    # Temporary re-packing diciontary to match new LightGlue version
+            pred["image1"] = {"descriptors": pred["descriptors1"], "image_size": pred["image_size1"], "keypoints": pred["keypoints1"], "scores": pred["keypoint_scores1"]}    # Temporary re-packing diciontary to match new LightGlue version
             pred1=self.local_feature_matcher(pred)
             matches = pred1['matches0'].detach().cpu().short().numpy()
 
             registered_feature = [self.registered_feature[i] for i in topk]
             for ind,match in enumerate(matches):
-                landmark_position=registered_feature[ind]
+                landmark_position=registered_feature[index + ind]
                 index_list=set(landmark_position[0])
                 feature_dict = {key: value for key, value in zip(landmark_position[0], landmark_position[1])}
                 pts0 = np.empty((len(match), 2))
@@ -102,8 +103,9 @@ class Local_matcher():
                     pts0_list.append(pts0[:counter])
                     pts1_list.append(pts1[:counter])
                     lms_list.append(lms[:counter])
-                    parent.retrived_image_index.append(topk[ind])
+                    parent.retrived_image_index.append(topk[index + ind])
             del pred,pred1
+            index += batch    # should increment index at the end of current batch
         return pts0_list,pts1_list,lms_list,max_dim
 
         
@@ -119,7 +121,7 @@ class Local_matcher():
         pred = {k: v.to(self.device) for k, v in pred.items()}
         pred['keypoint_scores0'] = pred.pop('scores0')
         pred['keypoint_scores1'] = pred.pop('scores1')
-
+        pred.update({f"image{num}": {"descriptors": pred[f"descriptors{num}"], "image_size": pred[f"image_size{num}"], "keypoints": pred[f"keypoints{num}"], "scores": pred[f"keypoint_scores{num}"]} for num in range(2)})    # Temporary re-packing diciontary to match new LightGlue version
         with torch.inference_mode():
             pred = self.local_feature_matcher(pred)
 
