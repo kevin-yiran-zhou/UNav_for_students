@@ -1,14 +1,14 @@
-location: 
- place: New_York_University
- building: Engineering_School_Building_Six
- floor: '4th_floor'
- scale: 0.01209306372
-
 # location: 
-#  place: New_York_City
-#  building: LightHouse
-#  floor: '6th_floor'
-#  scale: 0.01098358101
+#  place: New_York_University
+#  building: Engineering_School_Building_Six
+#  floor: '4th_floor'
+#  scale: 0.01209306372
+
+location: 
+ place: New_York_City
+ building: LightHouse
+ floor: '6th_floor'
+ scale: 0.01098358101
 
 server:
   host: "128.122.136.173"

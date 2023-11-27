@@ -1,1 +1,1 @@
-from .data_loader import load_data
+from .data_loader_multifloor import load_data

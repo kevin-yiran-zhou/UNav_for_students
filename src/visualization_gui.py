@@ -702,12 +702,12 @@ class Main_window(ttk.Frame):
             else:
                 length = action_list[0][1]
                 if not self.initial:
-                    self.instruction_message=command_debug(action_list)
+                    self.instruction_message=command_debug(action_list, True)
                     self.initial = True
                     self.base_len=length
                 else:
                     try:
-                        self.instruction_message,self.halfway=command_count(self,action_list,length)
+                        self.instruction_message,self.halfway=command_count(self,action_list,length, True)
                     except:
                         print(action_list)
 

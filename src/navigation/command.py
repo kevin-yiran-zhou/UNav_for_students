@@ -41,29 +41,40 @@ def clean(rot_clock):
     else:
         return False
 
-def command_debug(action_list):
+def command_debug(action_list, same_floor):
     message = ''
     for i, ac in enumerate(action_list):
         rot_clock, distance = ac
         direction = get_direction(rot_clock)   #go straight, right, left
         # distance = round(distance*3.28,1)
         distance = int(distance*3.28)
-        message += f"please {direction} and walk {distance} feet along {int(rot_clock)} o'clock direction. "
+        message += f"Please {direction} and walk {distance} feet along {int(rot_clock)} o'clock direction"
         # message += 'Please walk %.1f meters along %d clock' % (
         #     distance, int(rot_clock))
         if i < len(action_list) - 1:
             message += '. Then '
         else:
-            message += '. And you will arrive the destination.\n'
+            if same_floor:
+                message += '. And you will arrive the destination.\n'
+            else:
+                message += '. And you will arrive the elevator.\n'
     return message
 
-def command_alert(action_list):
+def command_alert(action_list, same_floor):
     message = ''
     rot_clock,next_distance=action_list[0]  #define actionlist
     direction = get_direction(rot_clock)    #get direction
-    next_station='your destination' if len(action_list)==1 else '' #arrive at destination
+    if len(action_list)==1:
+        if same_floor:
+            next_station = 'your destination'
+        else:
+            next_station = 'the elevator'
+    else:
+        next_station = ''
     if next_station=='your destination' and next_distance<2:        
         message='You have arrived your destination'
+    elif next_station=='the elevator' and next_distance<2:        
+        message='Take the elevator to your destination floor'
     else:                                               
         # next_distance = round(next_distance*3.28,1)                 #not arrived at destination yet    
         next_distance = int(next_distance*3.28)                                              
@@ -73,17 +84,29 @@ def command_alert(action_list):
         if next_station=='':
             rot_clock,next_distance=action_list[1]
             direction = get_direction(rot_clock)
-            next_station='your destination' if len(action_list)==2 else ''
+            if len(action_list)==2:
+                if same_floor:
+                    next_station = 'your destination'
+                else:
+                    next_station = 'the elevator'  
+            else:
+                next_station = ''
             message += f" Then {direction}. "
         else:
             message +=' to approach '+next_station
     return message
 
-def command_normal(action_list):
+def command_normal(action_list, same_floor):
     message = ''
     rot_clock,next_distance=action_list[0]
     direction = get_direction(rot_clock)
-    next_station='your destination' if len(action_list)==1 else ''
+    if len(action_list)==1:
+        if same_floor:
+            next_station = 'your destination'
+        else:
+            next_station = 'the elevator'
+    else:
+        next_station = ''
     message += f"{direction} at {int(rot_clock)} o'clock direction, and walk {int(next_distance*3.28)} feet"
     # message += '%s to %d clock, and walk %d steps' % (
     #     direction, int(rot_clock), int(next_distance/0.55))
@@ -94,7 +117,7 @@ def command_normal(action_list):
     return message
 
 
-def command_count(parent,action_list,length):
+def command_count(parent,action_list,length, same_floor):
     result_message = ''
     rot_clock,next_distance=action_list[0]
     direction = get_direction(rot_clock)
@@ -110,8 +133,10 @@ def command_count(parent,action_list,length):
         if length<2:
             if len(action_list)>1:
                 result_message=f"{direction} at {int(action_list[1][0])} o'clock direction "
-            else:
+            elif same_floor:
                 result_message="You have arrived at your destination"
+            else: 
+                result_message="Take the elevator to your destination floor"
     
     return result_message
     

@@ -14,7 +14,7 @@ from time import time
 from datetime import datetime
 
 class Connected_Client(threading.Thread):
-    def __init__(self, parent,socket=None, address='128.122.136.173', hloc=None,trajectory=None, connections=None, destinations=None, map_scale=1,log_dir=None, logger=None,initial=False):
+    def __init__(self, parent,socket=None, address='128.122.136.173', hloc=None,trajectory=None, connections=None, map_location=None, destinations=None, map_scale=1,log_dir=None, logger=None,initial=False):
         threading.Thread.__init__(self)
         self.socket = socket
         self.address = address
@@ -24,6 +24,7 @@ class Connected_Client(threading.Thread):
         self.total_connections = 0
         self.hloc = hloc
         self.trajectory=trajectory
+        self.map_location=map_location
         self.destination = destinations
         self.destinations_dicts = {}
         for k0, v0 in destinations.items():
@@ -140,13 +141,36 @@ class Connected_Client(threading.Thread):
                     end_index = len(Destination) - 1
                 Destination = Destination[:end_index].strip()
                 # Destination = jpysocket.jpydecode(Destination)
-                self.logger.info('Destination: '+Destination)
                 Place, Building, Floor, Destination_ = Destination.split(',')
-                dicts = self.destination[Place][Building][Floor]
-                for i in dicts:
-                    for k, v in i.items():
-                        if k == Destination_:
-                            destination_id = v
+                if Place == self.map_location[0] and Building == self.map_location[1] and Floor == self.map_location[2]:
+                    self.logger.info('Destination: '+ Destination + ' (on the same floor)')
+                    same_building = True
+                    same_floor = True
+                    dicts = self.destination[Place][Building][Floor]
+                    for i in dicts:
+                        for k, v in i.items():
+                            if k == Destination_:
+                                destination_id = v
+                elif Place == self.map_location[0] and Building == self.map_location[1]:
+                    self.logger.info('Destination: ' + Destination + ' (in the same building); going to elevator now')
+                    same_building = True
+                    same_floor = False
+                    dicts = self.destination[Place][Building][self.map_location[2]]
+                    for i in dicts:
+                        for k, v in i.items():
+                            if ("elevator" in k) or ("Elevator" in k):
+                                destination_id = v
+                else:
+                    self.logger.warning('Destination not in this building')
+                    same_building = False
+                    same_floor = False
+                    dicts = self.destination[Place][Building][Floor]
+                    for i in dicts:
+                        for k, v in i.items():
+                            if k == Destination_:
+                                destination_id = v
+
+                
                 self.logger.info('=========Received one image=========')
                 pose = self.hloc.get_location(img)
                 image_destination = join(
@@ -172,9 +196,9 @@ class Connected_Client(threading.Thread):
                         fail_count = 0
                         action_list=actions(pose,path_list,self.map_scale)
                         if instruction_mode == "overviews":
-                            message = command_debug(action_list)
+                            message = command_debug(action_list, same_floor)
                         elif instruction_mode == "overview + segments" and not_overviewed: 
-                            message = command_debug(action_list)
+                            message = command_debug(action_list, same_floor)
                             not_overviewed = False
                         else: # no overview
                             length = action_list[0][1]
@@ -185,13 +209,13 @@ class Connected_Client(threading.Thread):
                                 self.parent.base_len=length
                                 self.parent.alert_distance = self.get_alert_distance(length, frequency_mode)
                                 if length < self.parent.alert_distance:
-                                    message=command_alert(action_list)
+                                    message=command_alert(action_list, same_floor)
                                 else:
-                                    message=command_normal(action_list)
+                                    message=command_normal(action_list, same_floor)
                             elif length < self.parent.alert_distance:
-                                message=command_alert(action_list)
+                                message=command_alert(action_list, same_floor)
                             else:
-                                message=command_count(self.parent,action_list,length)
+                                message=command_count(self.parent,action_list,length, same_floor)
                             message+='\n'
                     else: # no path
                         # message = 'There is no path to the destination. \n'
@@ -284,7 +308,7 @@ class Server():
             # sock, address = self.sock.recvfrom(1024)
             self.connections.append(
                 Connected_Client(parent=self,socket=sock, address=address, hloc=self.hloc,trajectory=self.trajectory, connections=self.connections,
-                                 destinations=map_data['destinations'], map_scale=self.scale, log_dir=self.log_path, logger=self.logger))
+                                 map_location=map_data['map_location'], destinations=map_data['destinations'], map_scale=self.scale, log_dir=self.log_path, logger=self.logger))
             self.connections[len(self.connections) - 1].start()
             self.logger.info("New connection at ID " +
                              str(self.connections[len(self.connections) - 1]))
