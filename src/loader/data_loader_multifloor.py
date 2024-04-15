@@ -120,6 +120,7 @@ def load_data(config):
     Load destination list
     """
     destinations=load_destination(paths['Destination'])
+
     map_data['destinations']=destinations
 
     """
