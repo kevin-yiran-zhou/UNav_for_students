@@ -21,6 +21,8 @@ class Trajectory():
 
     def calculate_path(self,pose,destination_id):
         for i,loc in enumerate(self.anchor_location):
+            # if isinstance(loc, dict):
+            #     loc = loc['location']
             self.M[i,-1]=self.distance(pose, loc)
         _, Pr = shortest_path(self.M, directed=True, method='FW', return_predecessors=True)
         index=self.anchor_name.index(destination_id)

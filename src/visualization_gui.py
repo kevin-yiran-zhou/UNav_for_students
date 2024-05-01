@@ -688,6 +688,8 @@ class Main_window(ttk.Frame):
         """
         Navigation
         """
+        print("destination:")
+        print(self.destination)
         if self.pose and len(self.destination)>0:
             self.paths=[]
             for destination_id in self.destination:
